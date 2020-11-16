@@ -1,0 +1,68 @@
+.card.post {
+    height: 95vh;
+}
+
+
+.post-action {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: transparent;
+    border: none;
+    color: #414141;
+    outline: none;
+    margin-top: auto;
+    padding: 0;
+
+    &:hover {
+        color: #209cee;
+    }
+
+    svg {
+        width: 2rem !important;
+        height: 2rem !important;
+    }
+}
+
+.lead {
+    height: 100%;
+    padding: 0 0.5rem;
+    word-break: break-word;
+    overflow: hidden;
+    max-height: 13vh;
+}
+
+
+.like.liked {
+    color: rgb(255, 0, 0);
+}
+
+span.likes {
+    font-weight: bold;
+}
+
+.user-text {
+    p {
+        line-height: 2rem;
+        white-space: nowrap;
+    }
+
+    a {
+        margin-top: -1rem;
+    }
+}
+
+.user-info {
+    display: flex;
+    align-items: center;
+
+    figure {
+        margin-right: 10px;
+    }
+
+    @media screen and (max-width: 410px) {
+        figure {
+            display: none;
+        }
+    }
+}

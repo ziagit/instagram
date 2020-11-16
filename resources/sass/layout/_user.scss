@@ -1,0 +1,30 @@
+.user-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 100vw;
+    padding: 1.5rem;
+    margin-top: -2rem;
+    margin-bottom: 1rem;
+    background: white;
+
+    .user-info {
+        div {
+            flex-wrap: wrap;
+        }
+
+        figure {
+            margin-right: 1rem;
+        }
+    }
+
+    .user-button,
+    .user-info,
+    .user-biography {
+        margin-left: auto;
+        margin-right: auto;
+        margin-top: 1rem;
+        width: 100%;
+        max-width: 500px;
+    }
+}

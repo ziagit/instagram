@@ -1,0 +1,63 @@
+.card-container {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+
+    .message {
+        padding: 1.5rem;
+    }
+}
+
+.card {
+    max-width: 90vw;
+    width: 30rem;
+    border-radius: 16px;
+    margin: 0 auto 3rem;
+
+    @media screen and (min-width: 1200px) {
+        margin: 0 3rem 3rem;
+    }
+
+    .card-body {
+        display: flex;
+        flex-direction: column;
+        padding: 1.5rem;
+        height: 100%;
+        border-radius: 16px;
+
+        .card-image {
+            figure {
+                display: flex;
+                justify-content: flex-end;
+                height: 0;
+
+                &:before {
+                    content: "";
+                    padding-top: 100%;
+                }
+
+                img {
+                    object-fit: cover;
+                    border-radius: 16px 16px 0px 0px;
+                }
+            }
+        }
+
+        .card-content {
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            overflow: hidden;
+
+            .card-footer {
+                align-items: center;
+                justify-content: space-between;
+                border: 0;
+                width: 100%;
+                margin-bottom: -1.5rem;
+            }
+        }
+    }
+}

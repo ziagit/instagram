@@ -1,0 +1,30 @@
+.pagination {
+    margin: 1rem 0.5rem;
+
+    .pagination-list {
+        flex-wrap: nowrap;
+    }
+
+    .pagination-ellipsis {
+        min-width: 2.25em;
+    }
+
+    .pagination-previous,
+    .pagination-next,
+    .pagination-link {
+        border-color: #eee;
+        background-color: #eee;
+    }
+
+    .pagination-link.is-current {
+        border-color: #3273dc;
+        background-color: #3273dc;
+    }
+
+    @media screen and (max-width: 768px) {
+
+        .pagination-list {
+            margin: 0 50%;
+        }
+    }
+}

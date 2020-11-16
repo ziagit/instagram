@@ -1,0 +1,21 @@
+.navbar-item svg {
+    margin-right: 5px;
+}
+
+.navbar-brand {
+    display: flex;
+    position: absolute;
+    justify-content: center;
+    width: 100%;
+
+    svg {
+        width: 5rem;
+        height: 100%;
+    }
+}
+
+@media screen and (max-width: 1087px) {
+    .navbar-menu.is-active .navbar-start {
+        margin-top: 2.5rem;
+    }
+}

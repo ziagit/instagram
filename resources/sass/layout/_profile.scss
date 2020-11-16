@@ -1,0 +1,35 @@
+.profile-settings {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    margin-top: 1rem;
+
+    .profile-inputs {
+        width: 100%;
+    }
+}
+
+.profile-settings .file-icon {
+    margin: 0px;
+}
+
+@media screen and (min-width: 520px) {
+    .profile-settings {
+        align-items: normal;
+        justify-content: space-between;
+        flex-direction: row;
+        margin-top: 2rem;
+
+        .profile-inputs {
+            margin-left: 2rem;
+        }
+    }
+
+    .profile-settings .file-cta {
+        padding: 2rem 2rem !important;
+    }
+
+    .profile-image {
+        height: 100%;
+    }
+}

@@ -1,0 +1,24 @@
+.image-upload {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 15rem;
+    margin-bottom: 1rem;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+//File upload button
+.image-upload.hidden>* {
+    opacity: 0;
+}
+
+.image-upload:hover>* {
+    transition: opacity 0.3s ease-in;
+    opacity: 1;
+}
+
+.image-upload.profile-image {
+    clip-path: circle();
+}
