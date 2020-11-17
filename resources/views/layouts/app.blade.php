@@ -18,9 +18,9 @@
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
 
-<body>
+<body style="background-color: white;">
     <div id="app">
-        <nav class="navbar" role="navigation" aria-label="main navigation">
+        <nav class="navbar" role="navigation" aria-label="main navigation" style="position: fixed;top: 0;width: 100%;">
             <!-- Brand -->
             <div class="navbar-brand">
                 <a class="navbar-item" href="{{ url('/') }}">
@@ -89,7 +89,7 @@
             </div>
         </nav>
 
-        <main>
+        <main style="">
             @yield('content')
         </main>
     </div>
