@@ -62,6 +62,9 @@ class UsersController extends Controller
 
             $user->image = $imageName;
         }
+        else{
+            $user->image = "default.png";
+        }
 
         //Update rest if set.
         strlen($request->display_name) > 0 ? $user->display_name = $request->display_name : '';

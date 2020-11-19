@@ -24,7 +24,7 @@
             <!-- Brand -->
             <div class="navbar-brand">
                 <a class="navbar-item" href="{{ url('/') }}">
-                    {!! file_get_contents(public_path('svg/photoify_logo.svg')) !!}
+                    <img src='{{ asset("svg/photoify_logo.png")}}' width="100px">
                 </a>
                 <a role="button" class="navbar-burger" aria-label="menu" data-target=".navbar-menu" aria-expanded="false">
                     <span aria-hidden="true"></span>
@@ -89,13 +89,13 @@
             </div>
         </nav>
 
-        <main style="">
+        <main style="padding-top: 30px;">
             @yield('content')
         </main>
     </div>
 
     <script src="{{ asset('js/app.js') }}"></script>
-    <script defer src="https://use.fontawesome.com/releases/v5.6.3/js/all.js" integrity="sha384-EIHISlAOj4zgYieurP0SdoiBYfGJKkgWedPHH4jCzpCXLmzVsw1ouK59MuUtP4a1"
+    <script defer src="{{ asset('js/all.js')}}" integrity="sha384-EIHISlAOj4zgYieurP0SdoiBYfGJKkgWedPHH4jCzpCXLmzVsw1ouK59MuUtP4a1"
         crossorigin="anonymous"></script>
 </body>
 

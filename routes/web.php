@@ -12,6 +12,9 @@
 */
 
 Route::get('/', function () {
+    if(auth()->check()){
+        return redirect("/posts");
+    }
     return view('index');
 });
 

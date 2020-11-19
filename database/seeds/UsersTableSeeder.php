@@ -9,6 +9,6 @@ class UsersTableSeeder extends Seeder
      */
     public function run()
     {
-        factory(App\Post::class, 100)->create();
+        factory(App\Post::class, 20)->create();
     }
 }

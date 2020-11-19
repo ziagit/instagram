@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Post;
 use App\Like;
+use App\User;
 use Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -42,9 +43,11 @@ class PostsController extends Controller
         ->skip($count * ($page - 1))
         ->take($count)
         ->get();
-
+        
+        //Users
+        $users = User::take(10)->get();
         return view('posts.index', [
-            'posts' => $posts,
+            'posts' => $posts,'users' => $users,
             'pagination' => [
                 'current' => $page,
                 'count' => intval(ceil($pageCount / $count)),

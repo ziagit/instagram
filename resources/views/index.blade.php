@@ -3,9 +3,9 @@
 @section('content')
 <div class="index-container">
 
-    <div class="message has-background-dark">
+    <div class="message ">
         <div class="index-header is-flex is-justify-center w100">
-            {!! file_get_contents(public_path('svg/photoify_logo.svg')) !!}
+        <img src='svg/photoify_logo.png'>
         </div>
         <p class="is-size-4 has-text-white has-text-centered mb">{{ __('Create an account today and experience the
             future of social media') }}</p>

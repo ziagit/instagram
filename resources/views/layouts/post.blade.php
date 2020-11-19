@@ -1,8 +1,13 @@
-<div class="card post has-background-dark">
+<style>
+    .user-like:hover{
+        cursor: pointer;
+    }
+</style>
+<div class="card " style="width: 100%; margin-left: 0;">
     <div class="card-body is-transparent" style="padding: 0px;">
         <div class="card-image">
             <figure class="image is-square">
-                <img src="{{ asset('images/posts/'.$post->image) }}">
+                <img src="{{ asset('images/posts/'.$post->image) }}" >
             </figure>
         </div>
 
@@ -17,12 +22,12 @@
                         '@'.$post->user->name }}</a>
                 </div>
             </div>
-            <p class="lead is-size-5 has-text-white">{{ $post->description }}</p>
+            <p class="lead ">{{  str_limit($post->description,50) }}</p>
             <div class="card-footer">
                 <div class="buttons">
                     <button data-path="{{ route('posts.like', ['id'=>$post->id]) }}" class="post-action like {{ $post->likes->where('user_id', Auth::id())->count() > 0 ? "liked" : ""}}">
                         <span class="likes">{{ $post->likes->count() < 999 ? $post->likes->count() : "999+" }}</span>
-                        <i class="fas fa-heart"></i>
+                        <i class="fas fa-heart user-like" ></i>
                     </button>
 
                     @if($post->user->id === Auth::id())
@@ -32,6 +37,7 @@
                     @endif
                 </div>
                 <time class="has-text-grey-light" datetime="{{ $post->created_at }}"></time></div>
+                
         </div>
     </div>
 </div>
