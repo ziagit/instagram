@@ -5300,7 +5300,9 @@ a.box:active {
 }
 
 .image img.is-rounded {
-  border-radius: 290486px;
+  border-radius: 100%;
+  width: 48px;
+  height: 48px;
 }
 
 .image.is-square img,
@@ -12849,6 +12851,15 @@ label.panel-block:hover {
   color: red;
 }
 
+.circle-user-image{
+  float: left;
+  width: 56px;
+  height: 56px;
+  border-radius: 100%;
+  overflow: hidden;
+  background-color: blue;
+}
+
 span.likes {
   font-weight: bold;
 }
@@ -12943,3 +12954,23 @@ main {
   min-height: 100vh;
 }
 
+.margin-left-10{
+  margin-left: 10px;
+}
+
+.display-inline{
+  display: inline;
+}
+
+.circle-user-image-32{
+  float: left;
+  width: 32px;
+  height: 32px;
+  border-radius: 100%;
+  overflow: hidden;
+  background-color: blue;
+}
+
+.user-like:hover{
+  cursor: pointer;
+}

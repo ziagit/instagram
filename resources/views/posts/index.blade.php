@@ -13,20 +13,18 @@
 }
 }
 
-.auth-user-image{
-    float: left;
-    width: 50px;
-    height: 50px;
-  border-radius: 100%;
-  overflow: hidden;
-  background-color: blue;
-}
+
 </style>
-<div class="card-container" style="align-content: center;">
-   <div class="" style="float: left;
+<div class="card-container"  >
+    
+   <div class="" style="
     margin-right: 28px;
     max-width: 614px;
     width: 100%;">
+    <div class="card" style="
+    margin-right: 28px;
+    max-width: 614px;
+    width: 100%; height: 100px;"></div>
     @if(count($posts) > 0)
         @foreach($posts as $post)
             @include('layouts.post', $post)
@@ -39,28 +37,51 @@
     max-width: 293px;
     right: 0;
     width: 100%;" class="user_menu">
+        <div class="container">
             <div aria-labelledby="fdbdf25468ccc4 fee917d721624c">
-                <div class="">
-                    <div class="RR-M-  _2NjG_" aria-disabled="true" role="button" tabindex="-1">
-                        <canvas class="CfWVH" height="66" width="66" style="position: absolute; top: -5px; left: -5px; width: 66px; height: 66px;"></canvas>
-                        <a  href="/user/{{auth()->user()->id}}" tabindex="0" style="width: 56px; height: 56px;">
-                            <img alt="hassani.esmatullah's profile picture" class="auth-user-image" data-testid="user-avatar" draggable="false" src="{{ asset('images/avatar/'.auth()->user()->image)}}">
-                        </a>
-                </div>
+                <a  href="/user/{{auth()->user()->id}}" tabindex="0" style="width: 56px; height: 56px;">
+                    <img alt="hassani.esmatullah's profile picture" class="circle-user-image" data-testid="user-avatar" draggable="false" src="{{ asset('images/avatar/'.auth()->user()->image)}}">
+                </a>
+            
             </div>
-            <div class=""><div class="" id="fefb5aa91306e4">
-                <div class="">
-                    <div class=""><a  href="/user/{{auth()->user()->id}}">{{auth()->user()->display_name}}</a>
-                </div>
+            <div class="" id="fefb5aa91306e4">
+                <a href="/user/{{auth()->user()->id}}" class="margin-left-10">{{auth()->user()->display_name}}</a>
+            </div>
+            <div class="" id="f24bf6035e0061">
+                <span class="margin-left-10">{{auth()->user()->name}}</span>
             </div>
         </div>
-        <div class="" id="f24bf6035e0061">
-            <div class=""><div class=""><div class="">{{auth()->user()->name}}</div>
+        <div class="container" style="margin-top: 50px; width: 100%;">
+            <h5 class="display-inline">Suggestions For You</h5><a style="margin-left: 50px;">more</a><br>
+            <div style="margin-top: 10px; width: 100%;" >
+                @foreach(Helper::getUser() as $user)
+                <div style="display: inline-block; margin-top: 10px; width: 100%;">
+                    <div aria-labelledby="fdbdf25468ccc4 fee917d721624c" class="display-inline">
+                        <a  href="/user/{{$user->id}}" tabindex="0" style="width: 56px; height: 56px;">
+                            <img alt="hassani.esmatullah's profile picture" class="circle-user-image-32" data-testid="user-avatar" draggable="false" src="{{ asset('images/avatar/'.$user->image)}}">
+                        </a>
+                    
+                    </div>
+                    <div id="fefb5aa91306e4" class="display-inline">
+                        <a href="/user/{{$user->id}}" class="margin-left-10">{{$user->display_name}}</a>
+                    </div>
+                    <div class="" id="f24bf6035e0061">
+                        <span class="margin-left-10">{{$user->name}}</span>
+                    </div>
+                </div>
+                @endforeach
+            </div>
         </div>
     </div>
-</div>
-</div>
 
 
+</div>
+
+<script>
+    function showMoreDescription(post,event){
+        event.preventDefault();
+        document.getElementById("descripton-"+post.id).innerHTML = "lkjkjkj";
+    }
+</script>
 
 @endsection

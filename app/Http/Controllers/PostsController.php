@@ -44,10 +44,8 @@ class PostsController extends Controller
         ->take($count)
         ->get();
         
-        //Users
-        $users = User::take(10)->get();
         return view('posts.index', [
-            'posts' => $posts,'users' => $users,
+            'posts' => $posts,
             'pagination' => [
                 'current' => $page,
                 'count' => intval(ceil($pageCount / $count)),

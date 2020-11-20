@@ -61,7 +61,7 @@
                     <div class="navbar-item">
                         <div class="buttons">
                             <a class="button is-primary is-outlined" href="{{ route('account.show', ['id' => Auth::id()]) }}">
-                                {{ __('My Account') }}
+                                {{ __('Profile') }}
                             </a>
                             <form method="POST" action="{{ route('logout') }}">
                                 <!-- CSRF Token -->
