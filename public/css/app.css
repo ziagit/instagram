@@ -12974,3 +12974,36 @@ main {
 .user-like:hover{
   cursor: pointer;
 }
+
+/* Style the search field */
+form.comment input[type=text] {
+  padding: 10px;
+  font-size: 17px;
+  float: left;
+  width: 80%;
+  outline: transparent;
+  border: none;
+    border-color: transparent;
+}
+
+/* Style the submit button */
+form.comment button {
+  float: left;
+  width: 10%;
+  padding: 10px;
+  color: blue;
+  font-size: 17px;
+  cursor: pointer;
+  outline: transparent;
+  border: none;
+  border-color: transparent;
+  background-color: transparent;
+}
+
+
+/* Clear floats */
+form.comment::after {
+  content: "";
+  clear: both;
+  display: table;
+}
