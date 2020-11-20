@@ -80,7 +80,8 @@
 <script>
     function showMoreDescription(post,event){
         event.preventDefault();
-        document.getElementById("descripton-"+post.id).innerHTML = "lkjkjkj";
+        document.getElementById("descriptonـ"+post.id).innerHTML = post.description;
+        document.getElementById("more_id"+post.id).style.display="none";
     }
 </script>
 

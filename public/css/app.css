@@ -5301,8 +5301,8 @@ a.box:active {
 
 .image img.is-rounded {
   border-radius: 100%;
-  width: 48px;
-  height: 48px;
+  width: 32px;
+  height: 32px;
 }
 
 .image.is-square img,
@@ -12880,6 +12880,9 @@ span.likes {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
+  margin-left: 15px;
+  margin-top: 10px;
+  margin-bottom: 10px;
 }
 
 .user-info figure {
@@ -12980,7 +12983,7 @@ form.comment input[type=text] {
   padding: 10px;
   font-size: 17px;
   float: left;
-  width: 80%;
+  width: 90%;
   outline: transparent;
   border: none;
     border-color: transparent;
