@@ -7,8 +7,8 @@
                 <figure class="image is-32x32">
                     <img class="is-rounded" src="{{ asset('images/avatar/'.$post->user->image) }}">
                 </figure>
-                <div class="user-text">
-                    <a class="is-size-6 has-text-info" href="{{  route('account.show', ['id' => $post->user->id]) }}">{{
+                <div class="user-text ">
+                    <a class="is-size-6 has-text-info " href="{{  route('account.show', ['id' => $post->user->id]) }}">{{
                         '@'.$post->user->name }}</a>
                 </div>
             </div>
@@ -35,17 +35,79 @@
                     </a>
                 @endif
             </div>
-            <p class="lead "><span id="descriptonـ{{$post->id}}">{{  str_limit($post->description,50) }}</span><a href="#" id="more_id{{$post->id}}" onclick="showMoreDescription({{$post}},event);">more</a></p>
+            <p class="lead ">
+                <a href="{{  route('account.show', ['id' => $post->user->id]) }}" class="color-dark">
+                    <b>{{$post->user->name}}</b>
+                </a>
+                <span id="descriptonـ{{$post->id}}">{{  str_limit($post->description,20) }}</span>
+                <a href="#" id="more_id{{$post->id}}" onclick="showMoreDescription({{$post}},event);">more</a>
+            </p>
+            @if($post->comments->count() >0)
+                <a href="#" id="mor-comment-post/{{$post->id}}" class="color-dark ml-8">View all {{$post->comments->count()}} comments</a>
+                @foreach($post->comments->take(2) as $comment)
+                    <p class="lead ">
+                        <a href="{{  route('account.show', ['id' => $comment->id]) }}" class="color-dark">
+                            <b>{{$comment->name}}</b>
+                        </a>
+                        <span>{{  str_limit($comment->pivot->comment,100) }}</span>
+                        
+                    </p>
+                @endforeach
+            @endif
             <div class="card-footer">
                 
-                <time class="has-text-grey-light" datetime="{{ $post->created_at }}"></time>
+                <time class="has-text-grey-light ml-8" datetime="{{ $post->created_at }}"></time>
             </div>
             <hr>
-            <!-- The form -->
-            <form class="comment" action="{{URL('post-comment')}}/{{$post->id}}">
-                <input type="text" placeholder="Add a comment..." name="search" autocomplete="off">
-                <button type="submit">post</button>
+            <!-- The form of comment -->
+            <form class="comment" action="{{URL('comment')}}" method="post">
+                <input type="hidden" value="{{csrf_token()}}" name="_token" id="token{{$post->id}}" onkeyup="submitComment({{$post->id}},event)">
+                <input type="text" id="comment{{$post->id}}" placeholder="Add a comment..." name="comment" autocomplete="off">
+                <button  type="submit" onclick="submitFunction({{$post->id}});return false;" >post</button>
             </form>
         </div>
     </div>
 </div>
+
+<!-- Script for comment in a post -->
+<script>
+    function submitFunction(id)
+{
+    var comment = document.getElementById("comment"+id);
+    var _token = document.getElementById("token"+id);
+    var formData = new FormData(); 
+     if(comment.value != ""){
+        formData.append(comment.name, comment.value);
+        formData.append("post_id",id);
+        formData.append(_token.name,_token.value);
+        var xmlHttp = new XMLHttpRequest();
+        xmlHttp.onreadystatechange = function()
+        {
+            if(xmlHttp.readyState == 4 && xmlHttp.status == 200)
+            {
+                try {
+                var data = JSON.parse(xmlHttp.responseText);
+                if(data.status == true){
+                    comment.value = "";
+                }
+                } catch(err) {
+                    console.log(err.message + " in " + xmlhttp.responseText);
+                    return;
+                }
+                
+            }
+        }
+        xmlHttp.open("post", "comment"); 
+        xmlHttp.send(formData);
+     } 
+}
+
+function submitComment(id,event){
+    var comment = document.getElementById("comment"+id);
+    if(comment.value != ""){
+        if(event.keyCode == 13){
+            submitFunction(id);
+        }
+    }
+}
+</script>

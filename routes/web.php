@@ -11,10 +11,9 @@
 |
 */
 
+
 Route::get('/', function () {
-    if(auth()->check()){
-        return redirect("/posts");
-    }
+    
     return view('index');
 });
 
@@ -45,4 +44,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/account', function () {
         return redirect()->route('account.show', ['id' => Auth::id()]);
     });
+
+    //Comments route
+    Route::post("comment","CommentController@store")->name('comment');
 });

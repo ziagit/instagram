@@ -27,7 +27,7 @@ class PostsController extends Controller
     public function index()
     {
         //Ammount to fetch
-        $count = 20;
+        $count = 100;
 
         Request::validate([
             'page' => 'nullable|numeric',
@@ -38,7 +38,9 @@ class PostsController extends Controller
         $pageCount = Post::count();
 
         //Posts
-        $posts = Post::with(['likes', 'user'])
+        $posts = Post::with(['likes', 'user'])->with(array('comments'=> function($posts){
+            $posts->orderBy('pivot_created_at',"desc");
+        }))
         ->orderBy('id', 'desc')
         ->skip($count * ($page - 1))
         ->take($count)

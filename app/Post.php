@@ -12,6 +12,7 @@ class Post extends Model
 
     /**
      * The post that belong to the user.
+     * @return \Illuminate\Database\Eloquent\Relations\BelongTo
      */
     public function user()
     {
@@ -23,13 +24,20 @@ class Post extends Model
         return $this->hasMany(Like::class, 'post_id');
     }
 
+    // /**
+    //  * post has many comments
+    //  *
+    //  * @return \Illuminate\Database\Eloquent\Relations\HasMany
+    //  */
+    // public function comments()
+    // {
+    //     return $this->hasMany(Comment::class);
+    // }
     /**
-     * post has many comments
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     * The characteristic that belong to the product.
      */
     public function comments()
     {
-        return $this->hasMany(Comment::class);
+        return $this->belongsToMany(User::class)->withPivot('id','comment','created_at','updated_at');
     }
 }

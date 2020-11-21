@@ -35,7 +35,9 @@ class CommentController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request['user_id'] = auth()->user()->id;
+        Comment::create($request->all());
+        return response()->json(['status' => true,'message' => 'successfuly added your comment']);
     }
 
     /**

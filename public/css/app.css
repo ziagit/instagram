@@ -1432,7 +1432,7 @@ a.has-text-link:focus {
 }
 
 .has-text-info {
-  color: #209cee !important;
+  color: #363636 !important;
 }
 
 a.has-text-info:hover,
@@ -13009,4 +13009,12 @@ form.comment::after {
   content: "";
   clear: both;
   display: table;
+}
+
+.color-dark{
+  color: #363636;
+}
+
+.ml-8{
+  margin-left: 8px;
 }

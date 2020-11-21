@@ -15,6 +15,7 @@
 
 
 </style>
+
 <div class="card-container"  >
     
    <div class="" style="
@@ -45,7 +46,7 @@
             
             </div>
             <div class="" id="fefb5aa91306e4">
-                <a href="/user/{{auth()->user()->id}}" class="margin-left-10">{{auth()->user()->display_name}}</a>
+                <a href="/user/{{auth()->user()->id}}" class="margin-left-10 color-dark">{{auth()->user()->display_name}}</a>
             </div>
             <div class="" id="f24bf6035e0061">
                 <span class="margin-left-10">{{auth()->user()->name}}</span>
@@ -63,7 +64,7 @@
                     
                     </div>
                     <div id="fefb5aa91306e4" class="display-inline">
-                        <a href="/user/{{$user->id}}" class="margin-left-10">{{$user->display_name}}</a>
+                        <a href="/user/{{$user->id}}" class="margin-left-10 color-dark">{{$user->display_name}}</a>
                     </div>
                     <div class="" id="f24bf6035e0061">
                         <span class="margin-left-10">{{$user->name}}</span>
