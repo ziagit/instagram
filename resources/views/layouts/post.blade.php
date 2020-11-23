@@ -22,11 +22,11 @@
             <div class="buttons">
                 <button data-path="{{ route('posts.like', ['id'=>$post->id]) }}" class="post-action like {{ $post->likes->where('user_id', Auth::id())->count() > 0 ? "liked" : ""}}">
                     <span class="likes">{{ $post->likes->count() < 999 ? $post->likes->count() : "999+" }}</span>
-                    <i class="fas fa-heart user-like" ></i>
+                    <i class="fas fa-heart mp" ></i>
                 </button>
                 <a href=""  class="post-action " style="margin-left: 15px; background-color: #f8f9fa;">
                     
-                    <i class="fas fa-comment user-like" ></i>
+                    <i class="fas fa-comment mp" ></i>
                 </a>
 
                 @if($post->user->id === Auth::id())
@@ -39,11 +39,13 @@
                 <a href="{{  route('account.show', ['id' => $post->user->id]) }}" class="color-dark">
                     <b>{{$post->user->name}}</b>
                 </a>
-                <span id="descriptonـ{{$post->id}}">{{  str_limit($post->description,20) }}</span>
+                <span id="descriptonـ{{$post->id}}">{{  str_limit($post->description,40) }}</span>
+                @if(strlen($post->description) > 40)
                 <a href="#" id="more_id{{$post->id}}" onclick="showMoreDescription({{$post}},event);">more</a>
+                @endif
             </p>
             @if($post->comments->count() >0)
-                <a href="#" id="mor-comment-post/{{$post->id}}" class="color-dark ml-8">View all {{$post->comments->count()}} comments</a>
+                <a href="#" id="mor-comment-post/{{$post->id}}" class="color-dark ml-8">View all <span id="comment-count{{$post->id}}">{{$post->comments->count()}}</span> comments</a>
                 @foreach($post->comments->take(2) as $comment)
                     <p class="lead ">
                         <a href="{{  route('account.show', ['id' => $comment->id]) }}" class="color-dark">
@@ -69,45 +71,4 @@
     </div>
 </div>
 
-<!-- Script for comment in a post -->
-<script>
-    function submitFunction(id)
-{
-    var comment = document.getElementById("comment"+id);
-    var _token = document.getElementById("token"+id);
-    var formData = new FormData(); 
-     if(comment.value != ""){
-        formData.append(comment.name, comment.value);
-        formData.append("post_id",id);
-        formData.append(_token.name,_token.value);
-        var xmlHttp = new XMLHttpRequest();
-        xmlHttp.onreadystatechange = function()
-        {
-            if(xmlHttp.readyState == 4 && xmlHttp.status == 200)
-            {
-                try {
-                var data = JSON.parse(xmlHttp.responseText);
-                if(data.status == true){
-                    comment.value = "";
-                }
-                } catch(err) {
-                    console.log(err.message + " in " + xmlhttp.responseText);
-                    return;
-                }
-                
-            }
-        }
-        xmlHttp.open("post", "comment"); 
-        xmlHttp.send(formData);
-     } 
-}
-
-function submitComment(id,event){
-    var comment = document.getElementById("comment"+id);
-    if(comment.value != ""){
-        if(event.keyCode == 13){
-            submitFunction(id);
-        }
-    }
-}
-</script>
+@include('layouts.script')
