@@ -45,7 +45,23 @@
                 @endif
             </p>
             @if($post->comments->count() >0)
-                <a href="#" id="mor-comment-post/{{$post->id}}" class="color-dark ml-8">View all <span id="comment-count{{$post->id}}">{{$post->comments->count()}}</span> comments</a>
+            <div>
+                <a href="#" id="mor-comment-post/{{$post->id}}" class="color-dark ml-8" data-toggle="dropdown">View all 
+                    <span id="comment-count{{$post->id}}">{{$post->comments->count()}}</span> comments
+                </a>
+                <!-- <ul class="dropdown-menu" id="dropdown_menu" style="justify-content: center;width: 25%;margin-left: 32%;overflow-y: scroll;max-height: 200px;">
+                @foreach($post->comments as $comment)
+                    <p class="lead ">
+                        <a href="{{  route('account.show', ['id' => $comment->id]) }}" class="color-dark">
+                            <b>{{$comment->name}}</b>
+                        </a>
+                        <span>{{  str_limit($comment->pivot->comment,100) }}</span>
+                        
+                    </p>
+                @endforeach 
+                </ul> -->
+            </div>
+                
                 @foreach($post->comments->take(2) as $comment)
                     <p class="lead ">
                         <a href="{{  route('account.show', ['id' => $comment->id]) }}" class="color-dark">

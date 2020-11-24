@@ -39,7 +39,9 @@
 <div class="card-container">
     @if(count($user->posts) > 0)
         @foreach($user->posts as $post)
+            <div class="col-md-6" style="margin-right: 5%;" >
             @include('layouts.post', $post)
+            </div>
         @endforeach
     @else
         @include('posts.empty')

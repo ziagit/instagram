@@ -103,4 +103,15 @@ class UsersController extends Controller
 
         return redirect()->route('account.show', ['id' => $id]);
     }
+
+    /**
+     * @param $name
+     * return spicific users
+     */
+    public function getUsers($name)
+    {
+        $users = User::where('id',"!=",auth()->id())->where("name",'LIKE',"%".$name."%")->orWhere("display_name",'LIKE',"%".$name."%")
+        ->get();
+        return view("posts.showusers",compact("users"));
+    }
 }

@@ -28,7 +28,7 @@
                 
             }
         }
-        xmlHttp.open("post", "comment"); 
+        xmlHttp.open("post", "/comment"); 
         xmlHttp.send(formData);
      } 
 }

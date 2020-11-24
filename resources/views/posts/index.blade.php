@@ -19,7 +19,7 @@
 
 </style>
 
-<div class="row"  >
+<div class="row" style="right: 0;" >
     
    <div class="col-md-8" style="left: 0;">
     <div class="card" style="
@@ -34,7 +34,7 @@
     @endif
    </div>
    <div  class="user_menu col-md-4 " style="padding-left: 5%;">
-        <div style="margin-top: 10px;" >
+        <div style="margin-top: 10px; position: fixed;">
 
         <div class="">
             <div aria-labelledby="fdbdf25468ccc4 fee917d721624c">

@@ -33,8 +33,13 @@
             <!-- Brand -->
             <div class="navbar-brand" style="padding-right: 10%;">
                 <form class="" action="">
-                    <input type="text" class="" style="border-radius: 20px;border-color: gray; width: 200px;"
-                     id="user" placeholder="Search">
+                    <input type="text" class="" id="user_name" name="user_name" onkeyup="getUsers(event);" style="border-radius: 20px;border-color: gray; width: 200px;"
+                     id="user" placeholder="Search" data-toggle="dropdown" autocomplete="off">
+                    <ul class="dropdown-menu" id="dropdown_menu" style="justify-content: center;width: 25%;margin-left: 32%;overflow-y: scroll;max-height: 200px;">
+                    <span id="spinner_loadder">
+                        <i class="fa fa-spinner" aria-hidden="true" style="margin-left: 45%;"></i>
+                    </span> 
+                    </ul>
                 </form>
                 <a role="button" class="navbar-burger" aria-label="menu" data-target=".navbar-menu" aria-expanded="false">
                     <span aria-hidden="true"></span>
@@ -86,10 +91,15 @@
                             </figure>
                             <ul class="dropdown-menu">
                             <li class="ml-15 mt-10 mb-8" ><a href="/user/{{auth()->user()->id}}" class="color-dark hb-hidden"><i class="fa fa-user-circle" aria-hidden="true"> </i> Profile</a></li>
-                            <li class="ml-15 mt-10 mb-8"><a href="#" class="hb-hidden">Another action</a></li>
-                            <li class="ml-15 mt-10 mb-8"><a href="#" class="hb-hidden">Something else here</a></li>
-                            
-                            <li class="ml-15 mt-10 mb-8" class="hb-hidden"><a href="#">Separated link</a></li>
+                            <li class="ml-15 mt-10 mb-8"><a href="{{route('account')}}" class="hb-hidden color-dark"><i class="fas fa-cog"></i>Settings</a></li>
+                            <hr>
+                            <li class="ml-15 mt-10 mb-8" class="hb-hidden">
+                            <form method="POST" action="{{ route('logout') }}">
+                                <!-- CSRF Token -->
+                                @csrf
+                                <input type="submit" class="btn btn-link mp" value="{{ __('Log Out') }}">
+                            </form>
+                            </li>
                             </ul>
                             </div>
                             
@@ -101,7 +111,7 @@
                 <div class="navbar-end">
                     <div class="navbar-item">
                         <div class="buttons">
-                            <a class="button is-primary is-outlined" href="{{ route('register') }}">
+                            <a class="button is-primary is-outlined" href="{{ route('register') }}" >
                                 {{ __('Sign up') }}
                             </a>
                             <a class="button is-primary" href="{{ route('login') }}">
@@ -125,7 +135,39 @@
     <script src="{{ asset('js/app.js') }}"></script>
     <script defer src="{{ asset('js/all.js')}}" integrity="sha384-EIHISlAOj4zgYieurP0SdoiBYfGJKkgWedPHH4jCzpCXLmzVsw1ouK59MuUtP4a1"
         crossorigin="anonymous"></script>
-
+<script>
+    function getUsers(event){
+        $("#spinner_loadder").show("fast");
+        var name = $("#user_name").val();
+        event.preventDefault();
+        if(name != ""){
+            $.ajax({
+                url:"/get-users/"+name,
+                type:"get",
+                success:function(data){
+                    $("#spinner_loadder").hide("fast");
+                    if(data == ""){
+                        $("#dropdown_menu").html("<p style='text-align: center;'>No results found.</p>");
+                    }
+                    else{
+                        $("#dropdown_menu").html(data);
+                    }
+                },
+                error:function(er){
+                    $("#dropdown_menu").html('<span id="spinner_loadder">'+
+                        '<i class="fa fa-spinner" aria-hidden="true" style="margin-left: 45%;"></i>'+
+                    '</span>');
+                }
+            });
+        }
+        else{
+            $("#dropdown_menu").html('<span id="spinner_loadder">'+
+                        '<i class="fa fa-spinner" aria-hidden="true" style="margin-left: 45%;"></i>'+
+                    '</span>');
+        }
+        
+    }
+</script>
 </body>
 
 </html>

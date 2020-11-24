@@ -36,7 +36,7 @@ Route::middleware(['auth'])->group(function () {
     //Users
     Route::get('/account/settings', 'UsersController@settings')->name('account');
     Route::get('/user/{user}', 'UsersController@show')->name('account.show');
-
+    Route::get("/get-users/{name}","UsersController@getUsers");
     Route::patch('/account/settings', 'UsersController@update')->name('account.update');
     Route::post('/user/{user}', 'UsersController@follow')->name('account.follow');
 
