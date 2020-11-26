@@ -47,7 +47,7 @@
                 <form class="" action="">
                     <input type="text" class=""   id="user_name" name="user_name" onkeyup="getUsers(event);" style="border-radius: 20px;border-color: #ddd; width: 200px;"
                      id="user" placeholder="Search" data-toggle="dropdown" autocomplete="off">
-                    <ul class="dropdown-menu" id="dropdown_menu" style="justify-content: center;width: 25%;margin-left: 20%;overflow-y: scroll;max-height: 200px;">
+                    <ul class="dropdown-menu" id="dropdown_menu" style="justify-content: center;width: 25%;margin-left: 20%;overflow-y: scroll;max-height: 200px;margin-bottom: ;">
                     <span id="spinner_loadder">
                         <i class="fa fa-spinner" aria-hidden="true" style="margin-left: 45%;"></i>
                     </span> 

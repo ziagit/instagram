@@ -27,7 +27,7 @@ class PostsController extends Controller
     public function index()
     {
         //Ammount to fetch
-        $count = 1;
+        $count = 10;
 
         Request::validate([
             'page' => 'nullable|numeric',
@@ -46,7 +46,7 @@ class PostsController extends Controller
         ->take($count)
         ->get();
         if (Request::ajax()) {
-    		return view('layouts.post', [
+    		return view('posts.post-scroll', [
                 'posts' => $posts,
                 'pagination' => [
                     'current' => $page,
@@ -74,7 +74,7 @@ class PostsController extends Controller
     public function liked()
     {
         //Ammount to fetch
-        $count = 4;
+        $count = 10;
 
         Request::validate([
             'page' => 'nullable|numeric',
@@ -97,7 +97,7 @@ class PostsController extends Controller
             ->take($count)
             ->get();
             if (Request::ajax()) {
-                return view('layouts.post', [
+                return view('posts.post-scroll', [
                     'posts' => $posts,
                     'pagination' => [
                         'current' => $page,
@@ -126,7 +126,7 @@ class PostsController extends Controller
     public function following()
     {
         //Ammount to fetch
-        $count = 4;
+        $count = 10;
 
         Request::validate([
             'page' => 'nullable|numeric',
@@ -148,7 +148,7 @@ class PostsController extends Controller
         ->take($count)
         ->get();
         if (Request::ajax()) {
-    		return view('layouts.post', [
+    		return view('posts.post-scroll', [
                 'posts' => $posts,
                 'pagination' => [
                     'current' => $page,

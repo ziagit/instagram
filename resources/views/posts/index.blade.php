@@ -1,23 +1,6 @@
 @extends('layouts.app')
 
 @section('content')
-<style>
-@media screen and (max-width: 768px) {
-.user_menu{
-    visibility: hidden;
-    clear: both;
-    float: left;
-    margin: 10px auto 5px 20px;
-    width: 28%;
-    display: none;
-}
-.navbar-90{
-    width: 90% !important; margin-left: 5% !important;
-}
-}
-
-
-</style>
 @include('layouts.script')
 
 <div class="row " style="" >
@@ -29,7 +12,9 @@
    
     <div id="menu_infinite">
     @if(count($posts) > 0)
-        @include('layouts.post', $posts)
+        @foreach($posts as $post)
+            @include('layouts.post', $post)
+        @endforeach
     @else
         @include('posts.empty')
     @endif

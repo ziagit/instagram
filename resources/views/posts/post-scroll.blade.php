@@ -1,3 +1,4 @@
+@foreach($posts as $post)
 <div class="card " style="padding: 0; margin-left: 0;">
     <div class="card-body is-transparent" style="padding: 0px;">
             <div class="user-info">
@@ -78,4 +79,5 @@
         </div>
     </div>
 </div>
+@endforeach
 

@@ -13058,3 +13058,18 @@ hb-hidden:hover{
 .ml-25{
   margin-left: 25%;
 }
+
+@media screen and (max-width: 768px) {
+  .user_menu{
+      visibility: hidden;
+      clear: both;
+      float: left;
+      margin: 10px auto 5px 20px;
+      width: 28%;
+      display: none;
+  }
+  .navbar-90{
+      width: 90% !important; margin-left: 5% !important;
+  }
+  }
+  
