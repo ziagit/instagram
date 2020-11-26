@@ -1,9 +1,9 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="card has-background-dark">
+<div class="card has-background-dark ml-25">
     <div class="card-body is-transparent">
-        <h1 class="is-size-2 is-size-4-touch has-text-white">{{ __('My Account') }}</h1>
+        <h1 class="is-size-2 is-size-4-touch ">{{ __('My Account') }}</h1>
                 @if($errors->any())
         <div class="notification is-warning">
             <button class="delete"></button>
@@ -37,7 +37,7 @@
                 <div class="profile-inputs">
                     <!-- Display Name Input -->
                     <div class="field">
-                        <label class="label has-text-white">{{ __('Display name') }}</label>
+                        <label class="label ">{{ __('Display name') }}</label>
                         <div class="control">
                             <input class="input" type="text" name="display_name" value="{{ isset($user->display_name) ? $user->display_name : '' }}"
                                 autofocus>
@@ -45,7 +45,7 @@
                     </div>
 
                     <div class="field">
-                        <label class="label has-text-white">{{ __('Biography') }}</label>
+                        <label class="label ">{{ __('Biography') }}</label>
                         <div class="control">
                             <textarea class="textarea has-fixed-size" name="biography" maxlength="128">{{ isset($user->biography) ? $user->biography : '' }}</textarea>
                         </div>
@@ -53,7 +53,7 @@
 
                     <!-- Email Input -->
                     <div class="field">
-                        <label class="label has-text-white">{{ __('E-Mail Address') }}</label>
+                        <label class="label ">{{ __('E-Mail Address') }}</label>
                         <div class="control">
                             <input class="input" type="email" name="email" placeholder="john.doe@example.com" value="{{ $user->email }}"
                                 required>
@@ -62,7 +62,7 @@
 
                     <!-- Password Input -->
                     <div class="field">
-                        <label class="label has-text-white">{{ __('Password') }}</label>
+                        <label class="label ">{{ __('Password') }}</label>
                         <div class="control">
                             <input class="input" type="password" name="password" required>
                         </div>
@@ -73,7 +73,7 @@
                         {{ __('Change password?') }}
                     </a>
                     <div id="new-pass" class="field is-hidden">
-                        <label class="label has-text-white">{{ __('New Password') }}</label>
+                        <label class="label ">{{ __('New Password') }}</label>
                         <div class="control">
                             <input class="input" type="password" name="new_password">
                         </div>

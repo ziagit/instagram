@@ -2,51 +2,51 @@
 
 @section('content')
 
-<div class="card h100">
+<div class="card h100 ml-25">
     <div class="card-body is-transparent">
-        <h1 class="is-size-2 is-size-4-touch has-text-white">{{ __('Sign up') }}</h1>
+        <h1 class="is-size-2 is-size-4-touch ">{{ __('Sign up') }}</h1>
         @if($errors->any())
         <div class="notification is-warning">
             <button class="delete"></button>
             <p>{{ $errors->first() }}</p>
         </div>
         @endif
-        <form method="POST" action="{{ route('register') }}">
+        <form method="POST" action="{{ route('registeruser') }}">
 
             <!-- CSRF Token -->
             @csrf
 
             <!-- Username Input -->
             <div class="field">
-                <label class="label has-text-white">{{ __('Your username') }}</label>
+                <label class="label ">{{ __('Your username') }}</label>
                 <div class="control">
-                    <input class="input" type="text" name="name" placeholder="JohnDoe" value="{{ old('name') }}"
-                        required autofocus>
+                    <input class="input" type="text" name="name" placeholder="Username" value="{{ old('name') }}"
+                        required autofocus autocomplete="off">
                 </div>
             </div>
 
             <!-- Email input -->
             <div class="field">
-                <label class="label has-text-white">{{ __('E-Mail Address') }}</label>
+                <label class="label ">{{ __('E-Mail Address') }}</label>
                 <div class="control">
-                    <input class="input" type="email" name="email" placeholder="john.doe@example.com" value="{{ old('email') }}"
-                        required>
+                    <input class="input" type="email" name="email" placeholder="E-Mail Address" value="{{ old('email') }}"
+                        required autocomplete="off">
                 </div>
             </div>
 
             <!-- Passsword input -->
             <div class="field">
-                <label class="label has-text-white">{{ __('Password') }}</label>
+                <label class="label ">{{ __('Password') }}</label>
                 <div class="control">
-                    <input class="input" type="password" name="password" required>
+                    <input class="input" type="password" name="password" required autocomplete="off">
                 </div>
             </div>
 
             <!-- Passsword confirm input -->
             <div class="field">
-                <label class="label has-text-white">{{ __('Confirm Password') }}</label>
+                <label class="label ">{{ __('Confirm Password') }}</label>
                 <div class="control">
-                    <input class="input" type="password" name="password_confirmation" required>
+                    <input class="input" type="password" name="password_confirmation"  required>
                 </div>
             </div>
 

@@ -1402,7 +1402,7 @@ a.has-text-dark:focus {
 }
 
 .has-background-dark {
-  background-color: #c9c0c0 !important;
+  background-color: #ddd !important;
 }
 
 .has-text-primary {
@@ -3600,7 +3600,6 @@ a.box:active {
 .input,
 .textarea {
   background-color: white;
-  border-color: #dbdbdb;
   color: #363636;
   -webkit-box-shadow: inset 0 1px 2px rgba(10, 10, 10, 0.1);
           box-shadow: inset 0 1px 2px rgba(10, 10, 10, 0.1);
@@ -8118,9 +8117,7 @@ a.navbar-item.is-active,
   }
 
   .navbar-menu {
-    background-color: white;
-    -webkit-box-shadow: 0 8px 16px rgba(10, 10, 10, 0.1);
-            box-shadow: 0 8px 16px rgba(10, 10, 10, 0.1);
+    background-color: transparent;
     padding: 0.5rem 0;
   }
 
@@ -12703,6 +12700,7 @@ label.panel-block:hover {
   padding: 1.5rem;
   margin-top: -2rem;
   margin-bottom: 1rem;
+  margin-left: 20%;
   background: white;
 }
 
@@ -12858,7 +12856,6 @@ label.panel-block:hover {
   padding: 0 0.5rem;
   word-break: break-word;
   overflow: hidden;
-  max-height: 13vh;
 }
 
 .like.liked {
@@ -13047,4 +13044,17 @@ form.comment::after {
 
 hb-hidden:hover{
   text-decoration: none !important;
+}
+
+
+
+@media screen and (max-width: 1000px) {
+  .navbar-90{
+    width: 100% !important;
+    margin-left: 1% !important;
+  }
+}
+
+.ml-25{
+  margin-left: 25%;
 }

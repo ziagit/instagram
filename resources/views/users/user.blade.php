@@ -36,12 +36,11 @@
         @endif
     </div>
 </div>
-<div class="card-container">
+<div class="card-container" style="margin-left: 20%;">
     @if(count($user->posts) > 0)
         @foreach($user->posts as $post)
-            <div class="col-md-6" style="margin-right: 5%;" >
             @include('layouts.post', $post)
-            </div>
+           
         @endforeach
     @else
         @include('posts.empty')

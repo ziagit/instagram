@@ -9,7 +9,13 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <title>{{ config('app.name') }}</title>
-
+    <meta property="og:site_name" content="instagram.com"/>
+    <meta property="og:title" content=" Find nearly anyone to follow"/>
+    <meta property="og:description"
+          content="@section('og:description') Welcome to the world’s fastest following online . @show"/>
+    <meta property="og:image" content="@section('og:image') {{asset('svg/photoify_logo.png')}} @show">
+    <meta property="og:url" content="@section('og:url') {{ url('/') }} @show">
+    <meta property="og:type" content="blog"/>
     <!-- Fonts -->
 
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
@@ -23,24 +29,31 @@
    
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <style>
+        Input:focus{
+            outline: none;
+        }
+    </style>
 </head>
 
 <body style="background-color: white;">
-<div class="row ">
-        <div class="col-md-1"></div>
-    <div id="app" class="col-md-10">
-        <nav class="navbar navbar-90" role="navigation" aria-label="main navigation"  style="position: fixed;width: 80%;">
-            <!-- Brand -->
-            <div class="navbar-brand" style="padding-right: 10%;">
+<div class="row " style="max-width: 1200px;">
+        
+        <nav class="navbar " role="navigation" aria-label="main navigation"  style="position: fixed;width: 100%; ">
+            <div class="navbar-90" style="width: 75%; margin-left: 15%; background-color: transparent;">
+                <!-- Brand -->
+            <div class="navbar-brand" style="padding-right: 35%;">
+                @if(auth()->check())
                 <form class="" action="">
-                    <input type="text" class="" id="user_name" name="user_name" onkeyup="getUsers(event);" style="border-radius: 20px;border-color: gray; width: 200px;"
+                    <input type="text" class=""   id="user_name" name="user_name" onkeyup="getUsers(event);" style="border-radius: 20px;border-color: #ddd; width: 200px;"
                      id="user" placeholder="Search" data-toggle="dropdown" autocomplete="off">
-                    <ul class="dropdown-menu" id="dropdown_menu" style="justify-content: center;width: 25%;margin-left: 32%;overflow-y: scroll;max-height: 200px;">
+                    <ul class="dropdown-menu" id="dropdown_menu" style="justify-content: center;width: 25%;margin-left: 20%;overflow-y: scroll;max-height: 200px;">
                     <span id="spinner_loadder">
                         <i class="fa fa-spinner" aria-hidden="true" style="margin-left: 45%;"></i>
                     </span> 
                     </ul>
                 </form>
+                @endif
                 <a role="button" class="navbar-burger" aria-label="menu" data-target=".navbar-menu" aria-expanded="false">
                     <span aria-hidden="true"></span>
                     <span aria-hidden="true"></span>
@@ -51,14 +64,11 @@
             <!-- Navbar-start -->
             <div id="navbar" class="navbar-menu">
                 <div class="navbar-start">
+                    
+                    @if(Auth::check())
                     <a class="navbar-item" href="{{ url('/') }}">
                         <img src='{{ asset("svg/photoify_logo.png")}}' width="100px">
                     </a>
-                    @if(Auth::check())
-                    <div class="navbar-item">
-                        
-                    </div>
-                    
                     
                     
                     @endif
@@ -97,7 +107,7 @@
                             <form method="POST" action="{{ route('logout') }}">
                                 <!-- CSRF Token -->
                                 @csrf
-                                <input type="submit" class="btn btn-link mp" value="{{ __('Log Out') }}">
+                                <input type="submit" class="btn btn-link mp color-dark" value="{{ __('Log Out') }}">
                             </form>
                             </li>
                             </ul>
@@ -108,30 +118,20 @@
                     </div>
                 </div>
                 @else
-                <div class="navbar-end">
-                    <div class="navbar-item">
-                        <div class="buttons">
-                            <a class="button is-primary is-outlined" href="{{ route('register') }}" >
-                                {{ __('Sign up') }}
-                            </a>
-                            <a class="button is-primary" href="{{ route('login') }}">
-                                {{ __('Log in') }}
-                            </a>
-                        </div>
-                    </div>
-                </div>
 
                 @endif
             </div>
+            </div>
         </nav>
-
+        <div class="col-md-1"></div>
+        <div id="app" class="col-md-10">
         <main style="padding-top: 5%;">
             @yield('content')
         </main>
     </div>
     <div class="col-md-1"></div>
 </div>
-
+    
     <script src="{{ asset('js/app.js') }}"></script>
     <script defer src="{{ asset('js/all.js')}}" integrity="sha384-EIHISlAOj4zgYieurP0SdoiBYfGJKkgWedPHH4jCzpCXLmzVsw1ouK59MuUtP4a1"
         crossorigin="anonymous"></script>

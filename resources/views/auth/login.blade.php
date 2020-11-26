@@ -1,9 +1,9 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="card  h100">
+<div class="card  h100 ml-25" >
     <div class="card-body is-transparent">
-        <h1 class="is-size-2 is-size-4-touch has-text-white">{{ __('Login') }}</h1>
+        <h1 class="is-size-2 is-size-4-touch ">{{ __('Login') }}</h1>
         @if($errors->any())
         <div class="notification is-warning">
             <button class="delete"></button>
@@ -17,16 +17,16 @@
 
             <!-- Email Input -->
             <div class="field">
-                <label class="label has-text-white">{{ __('E-Mail Address') }}</label>
+                <label class="label ">{{ __('E-Mail Address') }}</label>
                 <div class="control">
                     <input class="input" type="email" name="email" placeholder="john.doe@example.com" value="{{ old('email') }}"
-                        required autofocus>
+                        required autofocus autocomplete="off">
                 </div>
             </div>
 
             <!-- Password Input -->
             <div class="field">
-                <label class="label has-text-white">{{ __('Password') }}</label>
+                <label class="label ">{{ __('Password') }}</label>
                 <div class="control">
                     <input class="input" type="password" name="password" required>
                 </div>
@@ -43,7 +43,7 @@
                 <!-- Remember me check -->
                 <div class="column field">
                     <div class="is-flex is-justify-end control">
-                        <label class="checkbox has-text-white" for="remember">
+                        <label class="checkbox " for="remember">
                             <input class="form-check-input" type="checkbox" name="remember" id="remember"
                                 {{ old('remember') ? 'checked' : '' }}>
 

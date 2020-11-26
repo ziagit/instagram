@@ -27,7 +27,7 @@ class PostsController extends Controller
     public function index()
     {
         //Ammount to fetch
-        $count = 100;
+        $count = 1;
 
         Request::validate([
             'page' => 'nullable|numeric',
@@ -45,7 +45,17 @@ class PostsController extends Controller
         ->skip($count * ($page - 1))
         ->take($count)
         ->get();
-        
+        if (Request::ajax()) {
+    		return view('layouts.post', [
+                'posts' => $posts,
+                'pagination' => [
+                    'current' => $page,
+                    'count' => intval(ceil($pageCount / $count)),
+                ],
+            ]);
+        }
+        else{
+
         return view('posts.index', [
             'posts' => $posts,
             'pagination' => [
@@ -53,6 +63,7 @@ class PostsController extends Controller
                 'count' => intval(ceil($pageCount / $count)),
             ],
         ]);
+        }
     }
 
     /**
@@ -63,7 +74,7 @@ class PostsController extends Controller
     public function liked()
     {
         //Ammount to fetch
-        $count = 20;
+        $count = 4;
 
         Request::validate([
             'page' => 'nullable|numeric',
@@ -85,14 +96,24 @@ class PostsController extends Controller
             ->skip($count * ($page - 1))
             ->take($count)
             ->get();
-
-        return view('posts.index', [
-            'posts' => $posts,
-            'pagination' => [
-                'current' => $page,
-                'count' => intval(ceil($pageCount / $count)),
-            ],
-        ]);
+            if (Request::ajax()) {
+                return view('layouts.post', [
+                    'posts' => $posts,
+                    'pagination' => [
+                        'current' => $page,
+                        'count' => intval(ceil($pageCount / $count)),
+                    ],
+                ]);
+            }
+            else{
+            return view('posts.index', [
+                'posts' => $posts,
+                'pagination' => [
+                    'current' => $page,
+                    'count' => intval(ceil($pageCount / $count)),
+                ],
+            ]);
+            }
     }
 
     /**
@@ -105,7 +126,7 @@ class PostsController extends Controller
     public function following()
     {
         //Ammount to fetch
-        $count = 20;
+        $count = 4;
 
         Request::validate([
             'page' => 'nullable|numeric',
@@ -126,14 +147,24 @@ class PostsController extends Controller
         ->skip($count * ($page - 1))
         ->take($count)
         ->get();
-
-        return view('posts.index', [
-            'posts' => $posts,
-            'pagination' => [
-                'current' => $page,
-                'count' => intval(ceil($pageCount / $count)),
-            ],
-        ]);
+        if (Request::ajax()) {
+    		return view('layouts.post', [
+                'posts' => $posts,
+                'pagination' => [
+                    'current' => $page,
+                    'count' => intval(ceil($pageCount / $count)),
+                ],
+            ]);
+        }
+        else{
+            return view('posts.index', [
+                'posts' => $posts,
+                'pagination' => [
+                    'current' => $page,
+                    'count' => intval(ceil($pageCount / $count)),
+                ],
+            ]);
+        }
     }
 
     /**
@@ -184,6 +215,9 @@ class PostsController extends Controller
      */
     public function show($id)
     {
+        if(Request::ajax()){
+            return "";
+        }
         return view('posts.index', [
             'posts' => [Post::findOrFail($id)],
         ]);

@@ -37,20 +37,18 @@ class User extends Authenticatable
         return $this->hasMany(Like::class);
     }
 
-    // /**
-    //  * User has many comments
-    //  * 
-    //  * @return \Illuminate\Database\Eloquent\Relations\HasMany
-    //  */
-    // public function comments()
-    // {
-    //     return $this->hasMany(Comment::class);
-    // }
     /** 
-    * The characteristic that belong to the product.
+    * The user that belong to the comments.
     */
    public function comments()
    {
        return $this->belongsToMany(Post::class)->withPivot('id','comment','created_at','updated_at');
    }
+
+   /**
+    * The user that belong to the follows
+    */
+    public function user_follows(){
+        return $this->belongsTo(Follow::class,"id",'user_2');
+    }
 }

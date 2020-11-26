@@ -13,12 +13,18 @@
 
 
 Route::get('/', function () {
+
+    if(auth()->check()){
+        return redirect("posts");
+    }
     
     return view('index');
 });
 
+Route::post("/resend-email/{email}/{name}/{id}","UsersController@sendEmail");
+Route::post("/register-user","UsersController@registerUser")->name("registeruser");
 Auth::routes();
-
+Route::get("/verify-user-email/{email}/{id}","UsersController@registerVerifyUser");
 Route::middleware(['auth'])->group(function () {
     //Post routes
     Route::get('/posts', 'PostsController@index')->name('posts');

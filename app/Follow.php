@@ -10,5 +10,4 @@ class Follow extends Model
         'user_1', 'user_2',
     ];
 
-    public $timestamps = false;
 }

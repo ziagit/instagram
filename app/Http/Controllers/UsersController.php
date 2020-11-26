@@ -4,9 +4,15 @@ namespace App\Http\Controllers;
 
 use App\User;
 use App\Follow;
+use App\Mail\VerifyEmailCode;
+use App\NotVerifyUser;
+use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Validator;
 
 class UsersController extends Controller
 {
@@ -101,7 +107,7 @@ class UsersController extends Controller
             $record->delete();
         }
 
-        return redirect()->route('account.show', ['id' => $id]);
+        return back();
     }
 
     /**
@@ -113,5 +119,61 @@ class UsersController extends Controller
         $users = User::where('id',"!=",auth()->id())->where("name",'LIKE',"%".$name."%")->orWhere("display_name",'LIKE',"%".$name."%")
         ->get();
         return view("posts.showusers",compact("users"));
+    }
+
+    /**
+     * register user
+     * @param $request
+     */
+    public function registerUser(Request $request){
+        $data = [
+            'name' => ['required', 'string', 'max:32', 'unique:not_verify_users',"unique:users"],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:not_verify_users',"unique:users"],
+            'password' => ['required', 'string', 'min:6', 'confirmed'],
+        ];
+        $check = Validator::make($request->all(),$data);
+        if(!$check->fails()){
+            try{
+                $not_v_user = NotVerifyUser::create([
+                    'name' => $request->name,
+                    'email' => $request->email,
+                    'password' => Hash::make($request->password),
+        
+                ]);
+                $email = $request->email;
+                $name = $request->name;
+                $id   = $not_v_user->id;
+                Mail::to($email)->send(new VerifyEmailCode($email,$name,$id));
+                return view("auth.verifyviewuser",compact('email','name','id'));
+            }
+            catch(Exception $er){
+                return $er;
+            }
+        }
+        else{
+            return back()->with(["errors" => $check->errors()]);
+        }
+    }
+
+    public function sendEmail($email,$name,$id)
+    {
+        Mail::to($email)->send(new VerifyEmailCode($email,$name,$id));
+            return view("auth.verifyviewuser",compact('email','name','id'));
+    }
+
+    public function registerVerifyUser($email,$id){
+        $not_v_user = NotVerifyUser::find($id);
+        if($not_v_user != ""){
+            $user = new User();
+            $user->password = $not_v_user->password;
+            $user->name = $not_v_user->name;
+            $user->email = $email;
+            $user->save();
+            $not_v_user->delete();
+            return redirect("/login");
+        }
+        else{
+            return "errors";
+        }
     }
 }

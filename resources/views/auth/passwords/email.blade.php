@@ -1,9 +1,9 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="card has-background-dark h100">
+<div class="card has-background-dark h100 ml-25">
     <div class="card-body is-transparent">
-        <h1 class="is-size-2 is-size-4-touch has-text-white">{{ __('Reset Password') }}</h1>
+        <h1 class="is-size-2 is-size-4-touch ">{{ __('Reset Password') }}</h1>
         @if($errors->any())
         <div class="notification is-warning">
             <button class="delete"></button>
@@ -17,7 +17,7 @@
 
             <!-- Email Input -->
             <div class="field">
-                <label class="label has-text-white">{{ __('E-Mail Address') }}</label>
+                <label class="label ">{{ __('E-Mail Address') }}</label>
                 <div class="control">
                     <input class="input" type="email" name="email" value="{{ old('email') }}"
                         required autofocus>

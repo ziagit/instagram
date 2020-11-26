@@ -1,7 +1,5 @@
-<style>
- 
-</style>
-<div class="card " style="width: 100%; ">
+@foreach($posts as $post)
+<div class="card " style="padding: 0; margin-left: 0;">
     <div class="card-body is-transparent" style="padding: 0px;">
             <div class="user-info">
                 <figure class="image is-32x32">
@@ -20,7 +18,7 @@
 
         <div class="card-content">
             <div class="buttons">
-                <button data-path="{{ route('posts.like', ['id'=>$post->id]) }}" class="post-action like {{ $post->likes->where('user_id', Auth::id())->count() > 0 ? "liked" : ""}}">
+                <button style="outline: none;" data-path="{{ route('posts.like', ['id'=>$post->id]) }}" class="post-action like {{ $post->likes->where('user_id', Auth::id())->count() > 0 ? "liked" : ""}}">
                     <span class="likes">{{ $post->likes->count() < 999 ? $post->likes->count() : "999+" }}</span>
                     <i class="fas fa-heart mp" ></i>
                 </button>
@@ -49,17 +47,6 @@
                 <a href="#" id="mor-comment-post/{{$post->id}}" class="color-dark ml-8" data-toggle="dropdown">View all 
                     <span id="comment-count{{$post->id}}">{{$post->comments->count()}}</span> comments
                 </a>
-                <!-- <ul class="dropdown-menu" id="dropdown_menu" style="justify-content: center;width: 25%;margin-left: 32%;overflow-y: scroll;max-height: 200px;">
-                @foreach($post->comments as $comment)
-                    <p class="lead ">
-                        <a href="{{  route('account.show', ['id' => $comment->id]) }}" class="color-dark">
-                            <b>{{$comment->name}}</b>
-                        </a>
-                        <span>{{  str_limit($comment->pivot->comment,100) }}</span>
-                        
-                    </p>
-                @endforeach 
-                </ul> -->
             </div>
                 
                 @foreach($post->comments->take(2) as $comment)
@@ -71,6 +58,12 @@
                         
                     </p>
                 @endforeach
+            @else
+                <div>
+                    <a href="#" id="mor-comment-post/{{$post->id}}" class="color-dark ml-8" data-toggle="dropdown">View all 
+                        <span id="comment-count{{$post->id}}">0</span> comments
+                    </a>
+                </div>
             @endif
             <div class="card-footer">
                 
@@ -86,5 +79,5 @@
         </div>
     </div>
 </div>
+@endforeach
 
-@include('layouts.script')

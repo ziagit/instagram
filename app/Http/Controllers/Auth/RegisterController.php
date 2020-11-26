@@ -4,9 +4,12 @@ namespace App\Http\Controllers\Auth;
 
 use App\User;
 use App\Http\Controllers\Controller;
+use App\Mail\VerifyEmailCode;
+use App\NotVerifyUser;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
+use Illuminate\Support\Facades\Mail;
 
 class RegisterController extends Controller
 {
@@ -28,7 +31,7 @@ class RegisterController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/posts';
+    protected $redirectTo = '/send-email-toverify';
 
     /**
      * Create a new controller instance.
@@ -63,10 +66,13 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        return User::create([
+        $not_v_user = NotVerifyUser::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
+
         ]);
+        Mail::to($data['email'])->send(new VerifyEmailCode($data['email'],$data['name'],$not_v_user->id));
+        return redirect("/send-email-toverify");
     }
 }
