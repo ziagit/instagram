@@ -1,6 +1,9 @@
 @extends('layouts.app')
 
 @section('content')
+<div class="container row">
+    <div class="col-md-3"></div>
+    <div class="col-md-6">
 <div class="index-container ml-25" >
 
     <div class="message ">
@@ -18,6 +21,9 @@
             </a>
         </div>
     </div>
+</div>
+    </div>
+    <div class="col-md-3"></div>
 </div>
 
 @endsection

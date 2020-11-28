@@ -1,0 +1,119 @@
+@extends('layouts.app')
+
+@section('content')
+@foreach($posts as $post)
+<div class="row container" style="" >
+    <div class="col-md-2 col-sm-12"></div>
+    <div class="col-md-6">
+        <div class="card " style="padding: 0; width: 100%;">
+            <div class="card-body is-transparent" style="padding: 0px;">
+                <div class="user-info">
+                    <figure class="image is-32x32">
+                        <img class="is-rounded" src="{{ asset('images/avatar/'.$post->user->image) }}">
+                    </figure>
+                    <div class="user-text ">
+                        <a class="is-size-6 has-text-info " href="{{  route('account.show', ['id' => $post->user->id]) }}">{{
+                            '@'.$post->user->name }}</a>
+                    </div>
+                <a href="kjkl" class="color-dark" style="margin-left: 63%; font-size: 25px; margin-bottom: 5px;">...</a>
+                </div>
+                <div class="card-image">
+                    <figure class="image is-square">
+                        <img src="{{ asset('images/posts/'.$post->image) }}" >
+                    </figure>
+                </div>
+                <div class="card-content">
+            <div class="buttons">
+                <button style="outline: none;" data-path="{{ route('posts.like', ['id'=>$post->id]) }}" class="post-action like {{ $post->likes->where('user_id', Auth::id())->count() > 0 ? "liked" : ""}}">
+                    <span class="likes">{{ $post->likes->count() < 999 ? $post->likes->count() : "999+" }}</span>
+                    <i class="fas fa-heart mp" ></i>
+                </button>
+                <a href=""  class="post-action " style="margin-left: 15px; background-color: #f8f9fa;">
+                    
+                    <i class="fas fa-comment mp" ></i>
+                </a>
+
+                @if($post->user->id === Auth::id())
+                    <a href="{{ route('posts.edit', ['id'=>$post->id]) }}" class="post-action">
+                        <i class="fas fa-pen"></i>
+                    </a>
+                @endif
+            </div>
+            <p class="lead ">
+                <a href="{{  route('account.show', ['id' => $post->user->id]) }}" class="color-dark">
+                    <b>{{$post->user->name}}</b>
+                </a>
+                <span id="descriptonـ{{$post->id}}">{{  str_limit($post->description,40) }}</span>
+                @if(strlen($post->description) > 40)
+                <a href="#" id="more_id{{$post->id}}" onclick="showMoreDescription({{$post}},event);">more</a>
+                @endif
+            </p>
+                
+            
+            <div class="card-footer">
+                
+                <time class="has-text-grey-light ml-8" datetime="{{ $post->created_at }}"></time>
+            </div>
+            <hr>
+            
+        </div>
+            </div>
+        </div>
+    </div>
+   <div  class="user_menu col-md-3 " style="padding-left: 10%;">
+        <div style="margin-top: 10px; position: fixed;">
+
+            <div class="row" >
+            <span id="comment-count{{$post->id}}">{{$post->comments->count()}}</span> comments
+                <div style="margin-top: 10px; width: 100%; overflow-y: scroll; height: 350px;min-height: 200px;" >
+                    @foreach($post->comments as $comment)
+                    <div class="row" style="display: inline-block; margin-top: 10px; width: 100%;">
+                        <div class="col-md-4">
+                            <a  href="/user/{{$comment->id}}" tabindex="0" style="width: 56px; height: 56px;">
+                                <img alt="profile picture" class="circle-user-image-32" data-testid="user-avatar" draggable="false" src="{{ asset('images/avatar/'.$comment->image)}}">
+                            </a>
+                        </div>
+                        <div  class="col-md-8">
+                            <div class="row">
+                                <div class="col-md-8">
+                                <a href="{{  route('account.show', ['id' => $comment->id]) }}" class="color-dark fs-10">
+                                    <b>{{$comment->name}}</b>
+                                </a>
+                                <span class="fs-10">{{  $comment->pivot->comment }}</span>
+
+                            
+                                </div>
+                            </div>
+                        </div>
+                            
+                        
+                    </div>
+                    @endforeach
+                    <div class=" " style="padding: 0; width: 55%;margin-left: 0;">
+                    <div class="card-body is-transparent" style="padding: 0px;">
+                    <hr>
+                    <!-- The form of comment -->
+                    <form class="comment" action="{{URL('comment')}}" method="post">
+                        <input type="hidden" value="{{csrf_token()}}" name="_token" id="token{{$post->id}}" onkeyup="submitComment({{$post->id}},event)">
+                        <input type="text" id="comment{{$post->id}}" placeholder="Add a comment..." name="comment" autocomplete="off">
+                        <button  type="submit" onclick="submitFunction({{$post->id}});return false;" >post</button>
+                    </form>
+                    </div>
+                </div>
+                </div>
+            </div>
+            <div class="row">
+                
+                
+            </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+@endforeach
+
+@include('layouts.script')
+
+
+@endsection

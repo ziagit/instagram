@@ -155,12 +155,20 @@ class UsersController extends Controller
         }
     }
 
+    /**
+     * send email 
+     * @param $id,$name,$email
+     */
     public function sendEmail($email,$name,$id)
     {
         Mail::to($email)->send(new VerifyEmailCode($email,$name,$id));
             return view("auth.verifyviewuser",compact('email','name','id'));
     }
 
+    /**
+     * After click to verify message in email call this function
+     * @param $email,$id
+     */
     public function registerVerifyUser($email,$id){
         $not_v_user = NotVerifyUser::find($id);
         if($not_v_user != ""){

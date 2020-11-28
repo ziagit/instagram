@@ -25,7 +25,7 @@
 
             <!-- Description Input -->
             <div class="field">
-                <label class="label has-text-white">{{ __('Description') }}</label>
+                <label class="label ">{{ __('Description') }}</label>
                 <div class="control">
                     <textarea name="description" class="textarea" placeholder="e.g. Hello world" required autofocus>{{ $post->description }}</textarea>
                 </div>

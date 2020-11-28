@@ -25,7 +25,7 @@
     <link rel="stylesheet" href="{{asset('bootstrap/css/bootstrap.min.css')}}"  >
    
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet" type="text/css">
-    
+    <link rel="stylesheet" href="{{asset('modal/css/uikit.min.css')}}">
    
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
@@ -47,7 +47,7 @@
                 <form class="" action="">
                     <input type="text" class=""   id="user_name" name="user_name" onkeyup="getUsers(event);" style="border-radius: 20px;border-color: #ddd; width: 200px;"
                      id="user" placeholder="Search" data-toggle="dropdown" autocomplete="off">
-                    <ul class="dropdown-menu" id="dropdown_menu" style="justify-content: center;width: 25%;margin-left: 20%;overflow-y: scroll;max-height: 200px;margin-bottom: ;">
+                    <ul class="dropdown-menu" id="dropdown_menu" style="justify-content: center;width: 25%;margin-left: 20%;overflow-y: scroll;max-height: 200px;">
                     <span id="spinner_loadder">
                         <i class="fa fa-spinner" aria-hidden="true" style="margin-left: 45%;"></i>
                     </span> 
@@ -123,19 +123,26 @@
             </div>
             </div>
         </nav>
-        <div class="col-md-1"></div>
-        <div id="app" class="col-md-10">
         <main style="padding-top: 5%;">
             @yield('content')
         </main>
-    </div>
     <div class="col-md-1"></div>
 </div>
+@include('sweetalert::alert')
+@include('layouts.script')
     
-    <script src="{{ asset('js/app.js') }}"></script>
+    <script src="{{ asset('js/application.js') }}"></script>
     <script defer src="{{ asset('js/all.js')}}" integrity="sha384-EIHISlAOj4zgYieurP0SdoiBYfGJKkgWedPHH4jCzpCXLmzVsw1ouK59MuUtP4a1"
         crossorigin="anonymous"></script>
+    <script src="{{asset('modal/js/uikit.min.js')}}"></script>
+
 <script>
+     function showMoreDescription(post,event){
+        event.preventDefault();
+        document.getElementById("descriptonـ"+post.id).innerHTML = post.description;
+        document.getElementById("more_id"+post.id).style.display="none";
+    }
+
     function getUsers(event){
         $("#spinner_loadder").show("fast");
         var name = $("#user_name").val();

@@ -1,14 +1,15 @@
-<div class="card " style="padding: 0; margin-left: 0;">
+<div class="card " style="padding: 0; width: 100%;">
     <div class="card-body is-transparent" style="padding: 0px;">
-            <div class="user-info">
-                <figure class="image is-32x32">
-                    <img class="is-rounded" src="{{ asset('images/avatar/'.$post->user->image) }}">
-                </figure>
-                <div class="user-text ">
-                    <a class="is-size-6 has-text-info " href="{{  route('account.show', ['id' => $post->user->id]) }}">{{
-                        '@'.$post->user->name }}</a>
-                </div>
+        <div class="user-info">
+            <figure class="image is-32x32">
+                <img class="is-rounded" src="{{ asset('images/avatar/'.$post->user->image) }}">
+            </figure>
+            <div class="user-text ">
+                <a class="is-size-6 has-text-info " href="{{  route('account.show', ['id' => $post->user->id]) }}">{{
+                    '@'.$post->user->name }}</a>
             </div>
+            <a href="kjkl" class="color-dark" style="margin-left: 63%; font-size: 25px; margin-bottom: 5px;">...</a>
+        </div>
         <div class="card-image">
             <figure class="image is-square">
                 <img src="{{ asset('images/posts/'.$post->image) }}" >
@@ -21,7 +22,7 @@
                     <span class="likes">{{ $post->likes->count() < 999 ? $post->likes->count() : "999+" }}</span>
                     <i class="fas fa-heart mp" ></i>
                 </button>
-                <a href=""  class="post-action " style="margin-left: 15px; background-color: #f8f9fa;">
+                <a href="{{route('posts.details',['id'=>$post->id])}}"  class="post-action " style="margin-left: 15px; background-color: #f8f9fa;">
                     
                     <i class="fas fa-comment mp" ></i>
                 </a>
@@ -43,7 +44,7 @@
             </p>
             @if($post->comments->count() >0)
             <div>
-                <a href="#" id="mor-comment-post/{{$post->id}}" class="color-dark ml-8" data-toggle="dropdown">View all 
+                <a href="{{route('posts.details',['id'=>$post->id])}}" id="mor-comment-post/{{$post->id}}" class="color-dark ml-8" >View all 
                     <span id="comment-count{{$post->id}}">{{$post->comments->count()}}</span> comments
                 </a>
             </div>

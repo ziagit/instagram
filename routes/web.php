@@ -33,7 +33,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/posts/liked', 'PostsController@liked')->name('posts.liked');
     Route::get('/posts/{post}', 'PostsController@show')->name('posts.show');
     Route::get('/posts/{post}/edit', 'PostsController@edit')->name('posts.edit');
-
+    Route::get("/posts/{id}/details","PostsController@postDetails")->name("posts.details");
     Route::put('/posts', 'PostsController@store')->name('posts.store');
     Route::post('/posts/{post}', 'PostsController@like')->name('posts.like');
     Route::patch('/posts/{post}', 'PostsController@update')->name('posts.update');
@@ -45,7 +45,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get("/get-users/{name}","UsersController@getUsers");
     Route::patch('/account/settings', 'UsersController@update')->name('account.update');
     Route::post('/user/{user}', 'UsersController@follow')->name('account.follow');
-
+  
     //When logged in: Redirect /account to current users profile, /user/1 etc.
     Route::get('/account', function () {
         return redirect()->route('account.show', ['id' => Auth::id()]);

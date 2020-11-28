@@ -1,26 +1,22 @@
 @extends('layouts.app')
 
 @section('content')
-@include('layouts.script')
+<div class="row container" style="" >
+@if(count($posts) > 0)
 
-<div class="row " style="" >
-    
-   <div class="col-md-10">
+    <div class="col-md-2 col-sm-12"></div>
+   <div class="col-md-6">
     <div class="card" style="
     
-    height: 100px; margin-left: 0;"></div>
+    height: 100px; width: 100%;"></div>
    
     <div id="menu_infinite">
-    @if(count($posts) > 0)
         @foreach($posts as $post)
             @include('layouts.post', $post)
         @endforeach
-    @else
-        @include('posts.empty')
-    @endif
     </div>
    </div>
-   <div  class="user_menu col-md-2 " style="padding-left: 5%;">
+   <div  class="user_menu col-md-3 " style="padding-left: 10%;">
         <div style="margin-top: 10px; position: fixed;">
 
             <div class="">
@@ -37,10 +33,12 @@
                     <span class="margin-left-10">{{auth()->user()->name}}</span>
                 </div>
             </div>
-            <div class="" style="margin-top: 50px; width: 100%;">
-                <h5 class="display-inline">Suggestions For You</h5><a style="margin-left: 22%;">more</a><br>
+            <div class="row" style="margin-top: 50px;">
+                <h5 class="display-inline">Suggestions For You</h5>
+                <a class="uk-button " href="#modal-overflow" uk-toggle  style="margin-left: 15%;">more</a>
+                <br>
                 <div style="margin-top: 10px; width: 100%;" >
-                    @foreach(Helper::getUser()['users']->take(6) as $user)
+                    @foreach(Helper::getUser()['users']->take(5) as $user)
                     <div class="row" style="display: inline-block; margin-top: 10px; width: 100%;">
                         <div class="col-md-4">
                             <a  href="/user/{{$user->id}}" tabindex="0" style="width: 56px; height: 56px;">
@@ -51,18 +49,18 @@
                             <div class="row">
                                 <div class="col-md-8">
                                     <a href="/user/{{$user->id}}" class="margin-left-10 color-dark" >
-                                    @if($user->display_name == ""){{$user->email}}
+                                    @if($user->display_name == ""){{$user->name}}
                                     @else
                                     {{$user->display_name}}
                                     @endif
                                     </a><br>
                             
-                                    <span class="margin-left-10" style="font-size: 15px;">{{$user->name}}</span>
+                                    <span class="margin-left-10" style="font-size: 15px;">{{Helper::getUser()['status']}}</span>
                                 </div>
-                                <div class="col-md-2">
+                                <div class="col-md-2" >
                                 <form method="POST" action="{{ route('account.follow', ['id'=>$user->id]) }}" class="w100">
                                     @csrf
-                                    <input type="submit" class="btn btn-link mp color-dark" value="{{ __('Follow') }}">
+                                    <input type="submit" class="btn btn-link mp color-dark" value="{{ __('Follow') }}" style="margin-left: 0;">
                                 </form>
                                 </div>
                             </div>
@@ -75,19 +73,25 @@
             </div>
         </div>
     </div>
+    @include("posts.modal")
 
+@else
+
+<div class="col-md-4"></div>
+<div class="col-md-6">
+    @include('posts.empty')
+</div>
+<div class="col-md-2"></div>
+@endif
 
 </div>
+
 <div class="ajax-load text-center" style="display:none">
 	<p><img src="{{asset('loading.gif')}}" style="width: 50px;">Loading More post</p>
 </div>
 
 <script>
-    function showMoreDescription(post,event){
-        event.preventDefault();
-        document.getElementById("descriptonـ"+post.id).innerHTML = post.description;
-        document.getElementById("more_id"+post.id).style.display="none";
-    }
+    
     var page = 1;
 	$(window).scroll(function() {
 	    if($(window).scrollTop() + $(window).height() >= $(document).height()) {

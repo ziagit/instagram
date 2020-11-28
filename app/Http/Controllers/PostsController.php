@@ -202,7 +202,7 @@ class PostsController extends Controller
         $post->description = request()->description;
 
         $post->save();
-
+        toast('Your Post has been submited!','success');
         return redirect('posts/'.$post->id);
     }
 
@@ -307,5 +307,23 @@ class PostsController extends Controller
         }
 
         return response()->json(null, 200);
+    }
+
+    /**
+     * return posts details 
+     * @param $id
+     */
+    public function postDetails($id)
+    {
+        
+        //Posts
+        $posts = Post::with(['likes', 'user'])->with(array('comments'=> function($posts){
+            $posts->orderBy('pivot_created_at',"desc");
+        }))->where("id",$id)->get();
+        
+
+        return view('posts.post-details', [
+            'posts' => $posts,
+        ]);
     }
 }

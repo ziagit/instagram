@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="user-container">
+<div class="user-container" style="margin-right: 18%;">
     <div class="user-info">
         <div class="is-flex is-v-center">
             <figure class="image is-96x96">
@@ -36,7 +36,7 @@
         @endif
     </div>
 </div>
-<div class="card-container" style="margin-left: 20%;">
+<div class="card-container user-posts" >
     @if(count($user->posts) > 0)
         @foreach($user->posts as $post)
             @include('layouts.post', $post)

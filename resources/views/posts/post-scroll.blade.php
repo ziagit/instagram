@@ -1,5 +1,39 @@
+<script>
+    //Like posts with fetch
+
+function likeFunction(id){
+    var csrf = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+    var button = document.getElementById("button"+id);
+    var likes = document.getElementById("likes"+id);
+    if (button.classList.contains('liked')) {
+        likes.innerHTML = parseInt(likes.innerHTML) - 1;
+    } else {
+        likes.innerHTML = parseInt(likes.innerHTML) + 1;
+    }
+    button.classList.toggle("liked");
+
+        var formData = new FormData();
+        formData.append("_token",csrf);
+        var xmlHttp = new XMLHttpRequest();
+        xmlHttp.onreadystatechange = function()
+        {
+            if(xmlHttp.readyState == 4 && xmlHttp.status == 200)
+            {
+                try {
+                console.log("arry");
+                } catch(err) {
+                    console.log(err.message + " in " + xmlHttp.responseText);
+                    return;
+                }
+                
+            }
+        }
+        xmlHttp.open("post", "/posts/"+id); 
+        xmlHttp.send(formData);
+}
+</script>
 @foreach($posts as $post)
-<div class="card " style="padding: 0; margin-left: 0;">
+<div class="card " style="padding: 0;width: 100%;">
     <div class="card-body is-transparent" style="padding: 0px;">
             <div class="user-info">
                 <figure class="image is-32x32">
@@ -9,6 +43,7 @@
                     <a class="is-size-6 has-text-info " href="{{  route('account.show', ['id' => $post->user->id]) }}">{{
                         '@'.$post->user->name }}</a>
                 </div>
+                <a href="kjkl" class="color-dark" style="margin-left: 63%; font-size: 25px; margin-bottom: 5px;">...</a>
             </div>
         <div class="card-image">
             <figure class="image is-square">
@@ -18,11 +53,11 @@
 
         <div class="card-content">
             <div class="buttons">
-                <button style="outline: none;" data-path="{{ route('posts.like', ['id'=>$post->id]) }}" class="post-action like {{ $post->likes->where('user_id', Auth::id())->count() > 0 ? "liked" : ""}}">
-                    <span class="likes">{{ $post->likes->count() < 999 ? $post->likes->count() : "999+" }}</span>
+                <button id="button{{$post->id}}" onclick="likeFunction({{$post->id}})" style="outline: none;" data-path="{{ route('posts.like', ['id'=>$post->id]) }}" class="post-action like {{ $post->likes->where('user_id', Auth::id())->count() > 0 ? "liked" : ""}}">
+                    <span class="likes" id="likes{{$post->id}}">{{ $post->likes->count() < 999 ? $post->likes->count() : "999+" }}</span>
                     <i class="fas fa-heart mp" ></i>
                 </button>
-                <a href=""  class="post-action " style="margin-left: 15px; background-color: #f8f9fa;">
+                <a href="{{route('posts.details',['id'=>$post->id])}}"  class="post-action " style="margin-left: 15px; background-color: #f8f9fa;">
                     
                     <i class="fas fa-comment mp" ></i>
                 </a>
@@ -44,7 +79,7 @@
             </p>
             @if($post->comments->count() >0)
             <div>
-                <a href="#" id="mor-comment-post/{{$post->id}}" class="color-dark ml-8" data-toggle="dropdown">View all 
+                <a href="{{route('posts.details',['id'=>$post->id])}}" id="mor-comment-post/{{$post->id}}" class="color-dark ml-8" data-toggle="dropdown">View all 
                     <span id="comment-count{{$post->id}}">{{$post->comments->count()}}</span> comments
                 </a>
             </div>

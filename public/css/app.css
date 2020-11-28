@@ -13072,4 +13072,20 @@ hb-hidden:hover{
       width: 90% !important; margin-left: 5% !important;
   }
   }
+
+  .fs-10{
+    font-size: 10px;
+  }
+
+  @media screen and (min-width:660px) and (max-width:940px){
+    .user-posts{
+      width: 60%; margin-left: 10%;margin-right: 10%;
+    }
+  }
+
+  @media screen and (min-width:940px){
+    .user-posts{
+      width: 50%; margin-left: 40%;margin-right: 40%;
+    }
+  }
   

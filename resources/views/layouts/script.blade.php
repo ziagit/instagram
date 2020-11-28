@@ -42,4 +42,6 @@ function submitComment(id,event){
         }
     }
 }
+
+
 </script>
