@@ -8,7 +8,39 @@
                 <a class="is-size-6 has-text-info " href="{{  route('account.show', ['id' => $post->user->id]) }}">{{
                     '@'.$post->user->name }}</a>
             </div>
-            <a href="kjkl" class="color-dark" style="margin-left: 63%; font-size: 25px; margin-bottom: 5px;">...</a>
+            <a href="#modal-center{{$post->id}}" uk-toggle class="color-dark" style="margin-left: 63%; font-size: 25px; margin-bottom: 5px;">...</a>
+            
+            <div id="modal-center{{$post->id}}" class="uk-flex-top " uk-modal>
+                <div class="uk-modal-dialog uk-modal-body uk-margin-auto-vertical uk-width-large ">
+                    
+                    <a>
+                        <div class="uk-modal-close" style="text-align: center; border-bottom: 1px solid #ddd; padding-bottom: 20px;">
+                            Unfollow
+                        </div>
+                    </a>
+                    <a>
+                        <div class="uk-modal-close" onclick="shareOnfacebook(`{{config('app.url')}}/images/posts/{{$post->image}}`,`{{$post->user->name}}`);" style="text-align: center; border-bottom: 1px solid #ddd; padding-bottom: 20px;padding-top: 20px;">
+                            <i class="fab fa-facebook"></i> Share
+                        </div>
+                    </a>
+                    <a>
+                        <div class="uk-modal-close" onclick="shareOntwitter(`{{config('app.url')}}/images/posts/{{$post->image}}`,`{{$post->user->name}}`);" style="text-align: center; border-bottom: 1px solid #ddd; padding-bottom: 20px;padding-top: 20px;">
+                            <i class="fab fa-twitter"></i> Share
+                        </div>
+                    </a>
+                    <a>
+                        <div class="uk-modal-close" onclick="copyToClipboard(`{{config('app.url')}}/images/posts/{{$post->image}}`);showToast(`Link copied to clipboard.`);" class="uk-modal-close" style="text-align: center; border-bottom: 1px solid #ddd; padding-bottom: 20px;padding-top: 20px;">
+                            Copy link
+                        </div>
+                    </a>
+                    <a>
+                        <div class="uk-modal-close" style="text-align: center; padding-top: 20px;">
+                            Cancel
+                        </div>
+                    </a>
+                    
+                </div>
+            </div>
         </div>
         <div class="card-image">
             <figure class="image is-square">

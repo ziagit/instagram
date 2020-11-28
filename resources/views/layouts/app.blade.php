@@ -127,6 +127,9 @@
             @yield('content')
         </main>
     <div class="col-md-1"></div>
+
+    <!-- The actual snackbar -->
+    <div id="snackbar">Some text some message..</div>
 </div>
 @include('sweetalert::alert')
 @include('layouts.script')

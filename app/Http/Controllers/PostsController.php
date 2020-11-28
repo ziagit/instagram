@@ -202,7 +202,7 @@ class PostsController extends Controller
         $post->description = request()->description;
 
         $post->save();
-        toast('Your Post has been submited!','success');
+        toast('Your Post has been posted!','success');
         return redirect('posts/'.$post->id);
     }
 

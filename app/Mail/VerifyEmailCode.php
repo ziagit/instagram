@@ -34,7 +34,7 @@ class VerifyEmailCode extends Mailable
         $email = $this->email;
         $username = $this->username;
         $id = $this->id;
-        $url = config('mail.from.url');
+        $url = config('app.url');
         return $this->subject("Verify Account")->view('auth.verifyview',compact("email",'username','id','url'));
     }
 }

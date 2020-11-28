@@ -3,8 +3,8 @@
 @section('content')
 <div class="container row">
     <div class="col-md-4"></div>
-    <div class="col-md-4">
-        <div class="card has-background-dark h100 ml-25">
+    <div class="col-md-6">
+        <div class="card has-background-dark h100 ml-25" style="margin-left: 10px;">
             <div class="card-body is-transparent">
                 <h1 class="is-size-2 is-size-4-touch ">{{ __('Reset Password') }}</h1>
                 @if($errors->any())
@@ -58,7 +58,7 @@
             </div>
         </div>
     </div>
-    <div class="col-md-4"></div>
+    <div class="col-md-2"></div>
 </div>
 
 @endsection

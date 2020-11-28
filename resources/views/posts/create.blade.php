@@ -3,8 +3,8 @@
 @section('content')
 <div class="container row">
 <div class="col-md-4"></div>
-<div class="col-md-4">  
-    <div class="card has-background-dark h100">
+<div class="col-md-6">  
+    <div class="card has-background-dark h100" style="margin-left: 10px;">
         <div class="card-body is-transparent">
             @if($errors->any())
             <div class="notification is-warning">
@@ -59,6 +59,6 @@
         </div>
     </div>
 </div>
-<div class="col-md-4"></div>
+<div class="col-md-2"></div>
 </div>
 @endsection

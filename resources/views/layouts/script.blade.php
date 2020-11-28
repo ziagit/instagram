@@ -43,5 +43,40 @@ function submitComment(id,event){
     }
 }
 
+//share to facebook
+function shareOnfacebook(image,name){
+    var url = `https://www.facebook.com/sharer/sharer.php?u=${image}`;
+       window.open(url, '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');
+       return false;
+}
 
+//share to twitter
+function shareOntwitter(image,name){
+    var url = `https://twitter.com/intent/tweet?url=${image}&via=${name}&text=See this image`;
+    TwitterWindow = window.open(url, 'TwitterWindow',width=600,height=300);
+    return false;
+ }
+
+ //coppy the link
+ function copyToClipboard(text) {
+  var input = document.body.appendChild(document.createElement("input"));
+  input.value = text;
+  input.focus();
+  input.select();
+  document.execCommand('copy');
+  input.parentNode.removeChild(input);
+}
+
+//show toast
+function showToast(text) {
+  // Get the snackbar DIV
+  var x = document.getElementById("snackbar");
+  x.innerText = text;
+
+  // Add the "show" class to DIV
+  x.className = "show";
+
+  // After 3 seconds, remove the show class from DIV
+  setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
+}
 </script>
