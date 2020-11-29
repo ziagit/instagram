@@ -13161,9 +13161,20 @@ hb-hidden:hover{
   }
 }
 
-@media screen  and (min-width: 490px) and (max-width:600px){
+@media screen  and (min-width: 100px) and (max-width:575px){
   .navbar-brand{
     padding-right: 8% !important;
+    
+  }
+  .mobile-navbar-menu{
+    display: flex;
+    justify-content: center;
+  }
+}
+
+@media screen  and (min-width: 575px) and (max-width:690px){
+  .navbar-brand{
+    padding-right: 12% !important;
     
   }
   .mobile-navbar-menu{

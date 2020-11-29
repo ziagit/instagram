@@ -19540,19 +19540,14 @@ like.forEach(function (button) {
 
 /***/ }),
 /* 42 */
-/***/ (function(module, exports) {
+/***/ 
+(function(module, exports) {
 
-//Navbar burger
-var toggle = document.querySelector('.navbar-burger');
 
-toggle.addEventListener('click', function (event) {
-    var target = document.querySelector(event.target.dataset.target);
-
-    event.target.classList.toggle('is-active');
-    target.classList.toggle('is-active');
-});
 
 /***/ }),
+
+
 /* 43 */
 /***/ (function(module, exports) {
 

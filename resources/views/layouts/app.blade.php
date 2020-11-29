@@ -58,7 +58,7 @@
                     </ul>
                 </form>
                 @endif
-                <a role="button" class="navbar-burger" aria-label="menu" data-target=".navbar-menu" aria-expanded="false">
+                <a role="button" class="navbar-burger" id="navbar-burger" onclick="showMobilemenu(event);" aria-label="menu" data-target=".navbar-menu" aria-expanded="false">
                     <span aria-hidden="true"></span>
                     <span aria-hidden="true"></span>
                     <span aria-hidden="true"></span>

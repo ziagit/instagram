@@ -136,4 +136,14 @@ function showToast(text) {
         }
         
     }
+
+    /**
+     * show the mobile menu
+     */
+    function showMobilemenu(event){
+        var toggle = document.getElementById("navbar-burger");
+        var target = document.querySelector(event.target.dataset.target);
+        event.target.classList.toggle('is-active');
+        target.classList.toggle('is-active');
+    }
 </script>
