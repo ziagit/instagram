@@ -9,13 +9,15 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <title>{{ config('app.name') }}</title>
-    <meta property="og:site_name" content="instagram.com"/>
-    <meta property="og:title" content=" Find nearly anyone to follow"/>
-    <meta property="og:description"
-          content="@section('og:description') Welcome to the world’s fastest following online . @show"/>
-    <meta property="og:image" content="@section('og:image') {{asset('svg/photoify_logo.png')}} @show">
-    <meta property="og:url" content="@section('og:url') {{ url('/') }} @show">
-    <meta property="og:type" content="blog"/>
+    {{-- Open graph tags --}}
+    <meta property="instagram:site_name" content="{{config('app.url')}}"/>
+    <meta property="instagram:title" content=" Instagram ."/>
+    <meta property="instagram:description"
+          content=" Welcome to the world’s fastest growing online social media to comunicate with another persone."/>
+    <meta property="instagram:image" content=" {{ asset('svg/photoify_logo.png')}}">
+    <meta property="instagram:url" content=" {{ url('/') }}">
+    <meta property="instagram:type" content="blog"/>
+    <link rel="shortcut icon" href="{{ asset('svg/photoify_logo.png')}}" type="image/x-icon">
     <!-- Fonts -->
 
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
@@ -65,7 +67,7 @@
 
             <!-- Navbar-start -->
             <div id="navbar" class="navbar-menu" style="align-items: center;">
-                <div class="navbar-start">
+                <div class="navbar-start mobile-navbar-menu">
                     
                     @if(Auth::check())
                     <a class="navbar-item" href="{{ url('/') }}">
@@ -81,7 +83,7 @@
                 @if(Auth::check())
                 <div class="navbar-end" >
                     <div class="navbar-item" >
-                        <div class="buttons">
+                        <div class="buttons mobile-navbar-menu" >
 
                             <a class="navbar-item" href="{{ route('posts') }}">
                                 <i class="fas fa-home"></i>
