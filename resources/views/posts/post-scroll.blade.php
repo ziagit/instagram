@@ -1,37 +1,4 @@
-<script>
-    //Like posts with fetch
 
-function likeFunction(id){
-    var csrf = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
-    var button = document.getElementById("button"+id);
-    var likes = document.getElementById("likes"+id);
-    if (button.classList.contains('liked')) {
-        likes.innerHTML = parseInt(likes.innerHTML) - 1;
-    } else {
-        likes.innerHTML = parseInt(likes.innerHTML) + 1;
-    }
-    button.classList.toggle("liked");
-
-        var formData = new FormData();
-        formData.append("_token",csrf);
-        var xmlHttp = new XMLHttpRequest();
-        xmlHttp.onreadystatechange = function()
-        {
-            if(xmlHttp.readyState == 4 && xmlHttp.status == 200)
-            {
-                try {
-                console.log("arry");
-                } catch(err) {
-                    console.log(err.message + " in " + xmlHttp.responseText);
-                    return;
-                }
-                
-            }
-        }
-        xmlHttp.open("post", "/posts/"+id); 
-        xmlHttp.send(formData);
-}
-</script>
 @foreach($posts as $post)
 <div class="card " style="padding: 0;width: 100%;">
     <div class="card-body is-transparent" style="padding: 0px;">

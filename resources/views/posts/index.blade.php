@@ -88,7 +88,7 @@
 
 </div>
 
-<div class="ajax-load text-center" style="display:none">
+<div class="image-load text-center" style="display:none">
 	<p><img src="{{asset('loading.gif')}}" style="width: 25px;">Loading More post</p>
 </div>
 
@@ -115,13 +115,13 @@
                 data:{'scrool_view':true},
 	            beforeSend: function()
 	            {
-	                $('.ajax-load').show();
+	                $('.image-load').show();
 	            }
 	        })
 	        .done(function(data)
 	        {
 	            if(data == ""){
-	                $('.ajax-load').html("No more posts found");
+	                $('.image-load').html("No more posts found");
 	                return;
                 }
                 if(data != ""){
@@ -133,6 +133,39 @@
 	              alert('server not responding...');
 	        });
 	}
+
+      //Like posts with fetch
+
+function likeFunction(id){
+    var csrf = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+    var button = document.getElementById("button"+id);
+    var likes = document.getElementById("likes"+id);
+    if (button.classList.contains('liked')) {
+        likes.innerHTML = parseInt(likes.innerHTML) - 1;
+    } else {
+        likes.innerHTML = parseInt(likes.innerHTML) + 1;
+    }
+    button.classList.toggle("liked");
+
+        var formData = new FormData();
+        formData.append("_token",csrf);
+        var xmlHttp = new XMLHttpRequest();
+        xmlHttp.onreadystatechange = function()
+        {
+            if(xmlHttp.readyState == 4 && xmlHttp.status == 200)
+            {
+                try {
+                console.log("arry");
+                } catch(err) {
+                    console.log(err.message + " in " + xmlHttp.responseText);
+                    return;
+                }
+                
+            }
+        }
+        xmlHttp.open("post", "/posts/"+id); 
+        xmlHttp.send(formData);
+}
 </script>
 
 @endsection
