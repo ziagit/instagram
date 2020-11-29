@@ -96,6 +96,7 @@ function showToast(text) {
         var name = $("#user_name").val();
         event.preventDefault();
         if(name != ""){
+            $("#spinner_loadder").show("fast");
             $(".search-dropdown").attr("style","border:1px solid rgba(0,0,0,.15);");
             $.ajax({
                 url:"/get-users/"+name,
