@@ -6465,33 +6465,6 @@ a.tag:hover {
   vertical-align: top;
 }
 
-.dropdown.is-active .dropdown-menu,
-.dropdown.is-hoverable:hover .dropdown-menu {
-  display: block;
-}
-
-.dropdown.is-right .dropdown-menu {
-  left: auto;
-  right: 0;
-}
-
-.dropdown.is-up .dropdown-menu {
-  bottom: 100%;
-  padding-bottom: 4px;
-  padding-top: initial;
-  top: auto;
-}
-
-.dropdown-menu {
-  display: none;
-  right: 0;
-  min-width: 12rem;
-  padding-top: 4px;
-  position: absolute;
-  top: 100%;
-  z-index: 20;
-}
-
 .dropdown-content {
   background-color: white;
   border-radius: 4px;

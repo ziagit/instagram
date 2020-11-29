@@ -130,7 +130,7 @@
 	        })
 	        .fail(function(jqXHR, ajaxOptions, thrownError)
 	        {
-	              alert('server not responding...');
+                showToast("server not responding or check your network connection...");
 	        });
 	}
 
