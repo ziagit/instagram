@@ -95,7 +95,7 @@
 </div>
 
 <div class="ajax-load text-center" style="display:none">
-	<p><img src="{{asset('loading.gif')}}" style="width: 50px;">Loading More post</p>
+	<p><img src="{{asset('loading.gif')}}" style="width: 25px;">Loading More post</p>
 </div>
 
 <script>
