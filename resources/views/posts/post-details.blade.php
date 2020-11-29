@@ -15,14 +15,17 @@
                         <a class="is-size-6 has-text-info " href="{{  route('account.show', ['id' => $post->user->id]) }}">{{
                             '@'.$post->user->name }}</a>
                     </div>
-                    <a href="#modal-center{{$post->id}}" uk-toggle class="color-dark" style="margin-left: 63%; font-size: 25px; margin-bottom: 5px;">...</a>
+                    <a href="#modal-center{{$post->id}}" uk-toggle class="color-dark" style="right: -20px; font-size: 25px; margin-bottom: 5px; position: absolute; right: 6%;">...</a>
             
                     <div id="modal-center{{$post->id}}" class="uk-flex-top " uk-modal>
                         <div class="uk-modal-dialog uk-modal-body uk-margin-auto-vertical uk-width-large ">
                             
                             <a>
-                                <div class="uk-modal-close" style="text-align: center; border-bottom: 1px solid #ddd; padding-bottom: 20px;">
-                                    Unfollow
+                                <div  style="text-align: center; border-bottom: 1px solid #ddd; padding-bottom: 20px; color: red;">
+                                <form method="POST" action="{{ route('account.follow', ['id'=>$post->user->id]) }}" class="w100">
+                                            @csrf
+                                            <input type="submit" class="btn btn-link mp " style="color: red;" value="{{ __('Unfollow') }}" style="margin-left: 0;">
+                                        </form>
                                 </div>
                             </a>
                             <a>
@@ -48,7 +51,7 @@
                             
                         </div>
                     </div>
-            </div>
+                </div>
                 <div class="card-image">
                     <figure class="image is-square">
                         <img src="{{ asset('images/posts/'.$post->image) }}" >

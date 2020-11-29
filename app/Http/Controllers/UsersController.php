@@ -116,7 +116,8 @@ class UsersController extends Controller
      */
     public function getUsers($name)
     {
-        $users = User::where('id',"!=",auth()->id())->where("name",'LIKE',"%".$name."%")->orWhere("display_name",'LIKE',"%".$name."%")
+        $users = User::where('id',"!=",auth()->id())
+        ->where("name",'LIKE',"%".$name."%")->orWhere("display_name",'LIKE',"%".$name."%")
         ->get();
         return view("posts.showusers",compact("users"));
     }

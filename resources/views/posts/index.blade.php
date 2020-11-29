@@ -60,7 +60,15 @@
                                 <div class="col-md-2" >
                                 <form method="POST" action="{{ route('account.follow', ['id'=>$user->id]) }}" class="w100">
                                     @csrf
-                                    <input type="submit" class="btn btn-link mp color-dark" value="{{ __('Follow') }}" style="margin-left: 0;">
+                                    <button type="submit" class="btn btn-link mp color-dark" style="margin-left: 0;">
+                                        <?php $followm = "Follow";?>
+                                        @foreach(Helper::getUser()['followed'] as $follow)
+                                            @if($follow->user_2 == $user->id)
+                                                <?php $followm = 'You followed'; ?>
+                                            @endif
+                                        @endforeach
+                                        {{$followm}}
+                                    </button>
                                 </form>
                                 </div>
                             </div>

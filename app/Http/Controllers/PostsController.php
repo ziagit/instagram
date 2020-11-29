@@ -26,44 +26,58 @@ class PostsController extends Controller
      */
     public function index()
     {
-        //Ammount to fetch
-        $count = 10;
+         //Ammount to fetch
+         $count = 2;
 
-        Request::validate([
-            'page' => 'nullable|numeric',
-        ]);
-
-        //$_GET ?page=count, default 1
-        $page = intval(Request::query('page', 1));
-        $pageCount = Post::count();
-
-        //Posts
-        $posts = Post::with(['likes', 'user'])->with(array('comments'=> function($posts){
+         Request::validate([
+             'page' => 'nullable|numeric',
+         ]);
+ 
+         //$_GET ?page=count, default 1
+         $page = intval(Request::query('page', 1));
+         $pageCount = Post::whereIn('user_id', function ($query) {
+             return $query->select('user_2')->from('follows')->where('user_1', Auth::id());
+         })->count();
+ 
+         //Posts
+         $posts = Post::with(['likes', 'user'])
+         ->whereIn('user_id', function ($query) {
+             return $query->select('user_2')->from('follows')->where('user_1', Auth::id());
+         })->with(array('comments'=> function($posts){
             $posts->orderBy('pivot_created_at',"desc");
         }))
-        ->orderBy('id', 'desc')
-        ->skip($count * ($page - 1))
-        ->take($count)
-        ->get();
-        if (Request::ajax()) {
-    		return view('posts.post-scroll', [
-                'posts' => $posts,
-                'pagination' => [
-                    'current' => $page,
-                    'count' => intval(ceil($pageCount / $count)),
-                ],
-            ]);
-        }
-        else{
-
-        return view('posts.index', [
-            'posts' => $posts,
-            'pagination' => [
-                'current' => $page,
-                'count' => intval(ceil($pageCount / $count)),
-            ],
-        ]);
-        }
+         ->orderBy('id', 'desc')
+         ->skip($count * ($page - 1))
+         ->take($count)
+         ->get();
+         if (Request::ajax()) {
+             return view('posts.post-scroll', [
+                 'posts' => $posts,
+                 'pagination' => [
+                     'current' => $page,
+                     'count' => intval(ceil($pageCount / $count)),
+                 ],
+             ]);
+         }
+         else{
+             if($posts->isEmpty()){
+                 $posts = Post::with(['likes', 'user'])
+                 ->with(array('comments'=> function($posts){
+                    $posts->orderBy('pivot_created_at',"desc");
+                }))
+                 ->orderBy('id', 'desc')->take(2)
+                 ->skip($count * ($page - 1))
+                 ->take($count)
+                 ->get();
+             }
+             return view('posts.index', [
+                 'posts' => $posts,
+                 'pagination' => [
+                     'current' => $page,
+                     'count' => intval(ceil($pageCount / $count)),
+                 ],
+             ]);
+         }
     }
 
     /**

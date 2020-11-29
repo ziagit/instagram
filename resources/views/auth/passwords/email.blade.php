@@ -23,7 +23,7 @@
                         <label class="label ">{{ __('E-Mail Address') }}</label>
                         <div class="control">
                             <input class="input" type="email" name="email" value="{{ old('email') }}"
-                                required autofocus>
+                                required autofocus placeholder="E-mail address">
                         </div>
                     </div>
 

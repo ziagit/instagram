@@ -61,7 +61,6 @@ function shareOntwitter(image,name){
  function copyToClipboard(text) {
   var input = document.body.appendChild(document.createElement("input"));
   input.value = text;
-  input.focus();
   input.select();
   document.execCommand('copy');
   input.parentNode.removeChild(input);
@@ -79,4 +78,61 @@ function showToast(text) {
   // After 3 seconds, remove the show class from DIV
   setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
 }
+
+    /**show more description of a post
+    *@param post,event
+    */
+    function showMoreDescription(post,event){
+        event.preventDefault();
+        document.getElementById("descriptonـ"+post.id).innerHTML = post.description;
+        document.getElementById("more_id"+post.id).style.display="none";
+    }
+
+    /**
+     *Search all user
+     *@param event
+     */
+    function getUsers(event){
+        var name = $("#user_name").val();
+        event.preventDefault();
+        if(name != ""){
+            $(".search-dropdown").attr("style","border:1px solid rgba(0,0,0,.15);");
+            $.ajax({
+                url:"/get-users/"+name,
+                type:"get",
+
+                beforeSend: function()
+	            {
+                    $("#spinner_loadder").show("fast");
+	            },
+                error:function(er){
+                    $("#spinner_loadder").show("fast");
+                }
+	        })
+	        .done(function(data)
+	        {
+                $("#spinner_loadder").hide("fast");
+	            if(data == ""){
+                    $("#dropdown_menu").html("");
+                    $("#no-data").text("No results found.");
+	                return;
+                }
+                if(data != ""){
+                    $("#dropdown_menu").html(data);
+                }
+	        })
+	        .fail(function(jqXHR, ajaxOptions, thrownError)
+	        {
+                $("#spinner_loadder").show("fast");
+	        });
+        }
+        else{
+            $("#dropdown_menu").html("");
+            $("#spinner_loadder").hide("fast");
+            $("#no-data").text("");
+            $(".search-dropdown").attr("style","border:0px;");
+
+        }
+        
+    }
 </script>

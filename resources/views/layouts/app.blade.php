@@ -45,12 +45,14 @@
             <div class="navbar-brand" style="padding-right: 35%;">
                 @if(auth()->check())
                 <form class="" action="">
-                    <input type="text" class=""   id="user_name" name="user_name" onkeyup="getUsers(event);" style="border-radius: 20px;border-color: #ddd; width: 200px;"
+                    <input type="text" class=""   id="user_name" name="user_name" onkeyup="getUsers(event);" style="border-radius: 20px;border-color: #ddd; width: 200px;border: solid 1px;font-size: 11px;padding: 8px;"
                      id="user" placeholder="Search" data-toggle="dropdown" autocomplete="off">
-                    <ul class="dropdown-menu" id="dropdown_menu" style="justify-content: center;width: 25%;margin-left: 20%;overflow-y: scroll;max-height: 200px;">
-                    <span id="spinner_loadder">
-                        <i class="fa fa-spinner" aria-hidden="true" style="margin-left: 45%;"></i>
-                    </span> 
+                    <ul class="dropdown-menu search-dropdown"  >
+                        <li id="dropdown_menu"></li>
+                        <span id="spinner_loadder" style="display: none;align-items: center;">
+                            <img src="{{asset('loading.gif')}}" style="width: 15px;margin-left: 45%;">
+                        </span>
+                        <p id="no-data" style="text-align: center;"></p> 
                     </ul>
                 </form>
                 @endif
@@ -62,12 +64,12 @@
             </div>
 
             <!-- Navbar-start -->
-            <div id="navbar" class="navbar-menu">
+            <div id="navbar" class="navbar-menu" style="align-items: center;">
                 <div class="navbar-start">
                     
                     @if(Auth::check())
                     <a class="navbar-item" href="{{ url('/') }}">
-                        <img src='{{ asset("svg/photoify_logo.png")}}' width="100px">
+                        <img src='{{ asset("svg/photoify_logo.png")}}' style="max-height: 2.3rem;" width="100px">
                     </a>
                     
                     
@@ -99,7 +101,7 @@
                             <figure class="image is-22x22 mp" data-toggle="dropdown">
                                 <img class="is-rounded-22" src="{{ asset('images/avatar/'.auth()->user()->image) }}" draggable="false">
                             </figure>
-                            <ul class="dropdown-menu">
+                            <ul class="dropdown-menu profile-dropdown">
                             <li class="ml-15 mt-10 mb-8" ><a href="/user/{{auth()->user()->id}}" class="color-dark hb-hidden"><i class="fa fa-user-circle" aria-hidden="true"> </i> Profile</a></li>
                             <li class="ml-15 mt-10 mb-8"><a href="{{route('account')}}" class="hb-hidden color-dark"><i class="fas fa-cog"></i>Settings</a></li>
                             <hr>
@@ -125,11 +127,13 @@
         </nav>
         <main style="padding-top: 5%;">
             @yield('content')
-        </main>
-    <div class="col-md-1"></div>
 
     <!-- The actual snackbar -->
     <div id="snackbar">Some text some message..</div>
+        </main>
+        
+    <div class="col-md-1"></div>
+
 </div>
 @include('sweetalert::alert')
 @include('layouts.script')
@@ -139,45 +143,6 @@
         crossorigin="anonymous"></script>
     <script src="{{asset('modal/js/uikit.min.js')}}"></script>
 
-<script>
-     function showMoreDescription(post,event){
-        event.preventDefault();
-        document.getElementById("descriptonـ"+post.id).innerHTML = post.description;
-        document.getElementById("more_id"+post.id).style.display="none";
-    }
-
-    function getUsers(event){
-        $("#spinner_loadder").show("fast");
-        var name = $("#user_name").val();
-        event.preventDefault();
-        if(name != ""){
-            $.ajax({
-                url:"/get-users/"+name,
-                type:"get",
-                success:function(data){
-                    $("#spinner_loadder").hide("fast");
-                    if(data == ""){
-                        $("#dropdown_menu").html("<p style='text-align: center;'>No results found.</p>");
-                    }
-                    else{
-                        $("#dropdown_menu").html(data);
-                    }
-                },
-                error:function(er){
-                    $("#dropdown_menu").html('<span id="spinner_loadder">'+
-                        '<i class="fa fa-spinner" aria-hidden="true" style="margin-left: 45%;"></i>'+
-                    '</span>');
-                }
-            });
-        }
-        else{
-            $("#dropdown_menu").html('<span id="spinner_loadder">'+
-                        '<i class="fa fa-spinner" aria-hidden="true" style="margin-left: 45%;"></i>'+
-                    '</span>');
-        }
-        
-    }
-</script>
 </body>
 
 </html>

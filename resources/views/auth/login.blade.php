@@ -22,7 +22,7 @@
                     <div class="field">
                         <label class="label ">{{ __('E-Mail Address') }}</label>
                         <div class="control">
-                            <input class="input" type="email" name="email" placeholder="john.doe@example.com" value="{{ old('email') }}"
+                            <input class="input" type="email" name="email" placeholder="E-mail address" value="{{ old('email') }}"
                                 required autofocus autocomplete="off">
                         </div>
                     </div>
