@@ -13109,7 +13109,7 @@ hb-hidden:hover{
 }
 
 .profile-dropdown{
-  margin-top: 20px;
+  margin-top: 10px;
   right: 0;;
 }
 
@@ -13167,5 +13167,10 @@ hb-hidden:hover{
   .mobile-navbar-menu{
     display: flex;
     justify-content: center;
+  }
+}
+@media screen and (max-width:490px){
+  .profile-dropdown{
+    margin-top: 5px;
   }
 }
