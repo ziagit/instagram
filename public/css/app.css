@@ -13173,3 +13173,7 @@ hb-hidden:hover{
     margin-top: 5px;
   }
 }
+
+.fs-1rem{
+  font-size: 1rem;
+}

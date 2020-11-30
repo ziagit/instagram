@@ -72,7 +72,7 @@
                 <a href="{{  route('account.show', ['id' => $post->user->id]) }}" class="color-dark">
                     <b>{{$post->user->name}}</b>
                 </a>
-                <span id="descriptonـ{{$post->id}}">{{  str_limit($post->description,40) }}</span>
+                <span class="fs-1rem" id="descriptonـ{{$post->id}}">{{  str_limit($post->description,40) }}</span>
                 @if(strlen($post->description) > 40)
                 <a href="#" id="more_id{{$post->id}}" onclick="showMoreDescription({{$post}},event);">more</a>
                 @endif
@@ -80,7 +80,7 @@
             @if($post->comments->count() >0)
             <div>
                 <a href="{{route('posts.details',['id'=>$post->id])}}" id="mor-comment-post/{{$post->id}}" class="color-dark ml-8" >View all 
-                    <span id="comment-count{{$post->id}}">{{$post->comments->count()}}</span> comments
+                    <span class="fs-1rem" id="comment-count{{$post->id}}">{{$post->comments->count()}}</span> comments
                 </a>
             </div>
                 
@@ -108,7 +108,7 @@
             <!-- The form of comment -->
             <form class="comment" action="{{URL('comment')}}" method="post">
                 <input type="hidden" value="{{csrf_token()}}" name="_token" id="token{{$post->id}}" onkeyup="submitComment({{$post->id}},event)">
-                <input type="text" id="comment{{$post->id}}" placeholder="Add a comment..." name="comment" autocomplete="off">
+                <input type="text" style="font-size: 14px;" id="comment{{$post->id}}" placeholder="Add a comment..." name="comment" autocomplete="off">
                 <button  type="submit" onclick="submitFunction({{$post->id}});return false;" >post</button>
             </form>
         </div>
