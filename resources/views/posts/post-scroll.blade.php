@@ -48,9 +48,7 @@
                 </div>
             </div>
         <div class="card-image">
-            <figure class="image is-square">
-                <img src="{{ asset('images/posts/'.$post->image) }}" >
-            </figure>
+            <img src="{{ asset('images/posts/'.$post->image) }}" >
         </div>
 
         <div class="card-content">
@@ -81,7 +79,7 @@
             </p>
             @if($post->comments->count() >0)
             <div>
-                <a href="{{route('posts.details',['id'=>$post->id])}}" id="mor-comment-post/{{$post->id}}" class="color-dark ml-8" data-toggle="dropdown">View all 
+                <a href="{{route('posts.details',['id'=>$post->id])}}" id="mor-comment-post/{{$post->id}}" class="color-dark ml-8" >View all 
                     <span id="comment-count{{$post->id}}">{{$post->comments->count()}}</span> comments
                 </a>
             </div>
@@ -97,7 +95,7 @@
                 @endforeach
             @else
                 <div>
-                    <a href="#" id="mor-comment-post/{{$post->id}}" class="color-dark ml-8" data-toggle="dropdown">View all 
+                    <a href="{{route('posts.details',['id'=>$post->id])}}" id="mor-comment-post/{{$post->id}}" class="color-dark ml-8" data-toggle="dropdown">View all 
                         <span id="comment-count{{$post->id}}">0</span> comments
                     </a>
                 </div>

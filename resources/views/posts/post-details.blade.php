@@ -2,7 +2,7 @@
 
 @section('content')
 @foreach($posts as $post)
-<div class="row container" style="" >
+<div class="row container" >
     <div class="col-md-2 col-sm-12"></div>
     <div class="col-md-6">
         <div class="card " style="padding: 0; width: 100%;">
@@ -53,9 +53,7 @@
                     </div>
                 </div>
                 <div class="card-image">
-                    <figure class="image is-square">
-                        <img src="{{ asset('images/posts/'.$post->image) }}" >
-                    </figure>
+                    <img src="{{ asset('images/posts/'.$post->image) }}" >
                 </div>
             <div class="card-content">
                 <div class="buttons">

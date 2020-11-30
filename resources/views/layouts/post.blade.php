@@ -1,4 +1,4 @@
-<div class="card " style="padding: 0; width: 100%;">
+<div class="card" style="padding: 0; width: 100%;">
     <div class="card-body is-transparent" style="padding: 0px;">
         <div class="user-info">
             <figure class="image is-32x32">
@@ -46,9 +46,7 @@
             </div>
         </div>
         <div class="card-image">
-            <figure class="image is-square">
-                <img src="{{ asset('images/posts/'.$post->image) }}" >
-            </figure>
+            <img src="{{ asset('images/posts/'.$post->image) }}" >
         </div>
 
         <div class="card-content">
@@ -95,7 +93,7 @@
                 @endforeach
             @else
                 <div>
-                    <a href="#" id="mor-comment-post/{{$post->id}}" class="color-dark ml-8" data-toggle="dropdown">View all 
+                    <a href="{{route('posts.details',['id'=>$post->id])}}" id="mor-comment-post/{{$post->id}}" class="color-dark ml-8" >View all 
                         <span id="comment-count{{$post->id}}">0</span> comments
                     </a>
                 </div>
