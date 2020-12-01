@@ -4,6 +4,12 @@
     <div class="display-inline">
         <span tabindex="0" style="width: 56px; height: 56px;">
             <img alt="hassani.esmatullah's profile picture" class="circle-user-image-32" data-testid="user-avatar" draggable="false" src="{{ asset('images/avatar/'.$user->image)}}">
+        
+            <span style="margin-right: 10px;color: #28b351;">
+                @if(Cache::has("is_online".$user->id))
+                <i class="fas fa-circle" style="font-size: 9px;"></i>
+                @endif
+            </span>
         </span>
     
     </div>

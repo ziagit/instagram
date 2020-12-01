@@ -3,9 +3,14 @@
 <div class="card " style="padding: 0;width: 100%;">
     <div class="card-body is-transparent" style="padding: 0px;">
             <div class="user-info">
-                <figure class="image is-32x32">
+                <figure class="image is-32x32" style="margin-right: 0;">
                     <img class="is-rounded" src="{{ asset('images/avatar/'.$post->user->image) }}">
                 </figure>
+                <span style="margin-right: 10px;color: #28b351;">
+                    @if(Cache::has("is_online".$post->user->id))
+                    <i class="fas fa-circle" style="font-size: 9px;"></i>
+                    @endif
+                </span>
                 <div class="user-text ">
                     <a class="is-size-6 has-text-info " href="{{  route('account.show', ['id' => $post->user->id]) }}">{{
                         '@'.$post->user->name }}</a>
@@ -48,7 +53,7 @@
                 </div>
             </div>
         <div class="card-image">
-            <img src="{{ asset('images/posts/'.$post->image) }}" >
+            <img src="{{ asset($post->image) }}" >
         </div>
 
         <div class="card-content">

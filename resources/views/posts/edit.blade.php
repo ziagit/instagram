@@ -22,7 +22,20 @@
                     @method('PATCH')
 
                     <!-- Image input -->
-                    <div class="image-upload" style="background-image: url({{ asset('images/posts/'.$post->image) }})">
+                    <div class="image-upload" style="background-image: url({{ asset($post->image) }})">
+                    <div class="file is-boxed">
+                        <label class="file-label">
+                            <input class="file-input" type="file" name="image">
+                            <span class="file-cta">
+                            <span class="file-icon">
+                                <i class="fas fa-upload"></i>
+                            </span>
+                            <span class="file-label">
+                                Choose a file…
+                            </span>
+                            </span>
+                        </label>
+                    </div>
                     </div>
 
 

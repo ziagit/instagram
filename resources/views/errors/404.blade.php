@@ -11,9 +11,9 @@
 <center>
     <br><br><br><br>
    <section  id="error" class="container text-center">
-    <h1 style="color: red;">404, Page not found</h1>
-    <p style="color: black;">The Page you are looking for doesn't exist or an other error occurred.</p>
-    <a  style="color: blue;" href="/">Go To Homepage</a>
+   <h1>Sorry, this page isn't available.</h1>
+The link you followed may be broken, or the page may have been removed. 
+    <a  style="color: blue;" href="/">Go back to Instagram.</a>
 </section><!--/#error-->
 
 </center>

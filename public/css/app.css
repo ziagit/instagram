@@ -13177,3 +13177,9 @@ hb-hidden:hover{
 .fs-1rem{
   font-size: 1rem;
 }
+
+@media screen and (max-width:680px){
+  .ml-25{
+    margin-left: 0;
+  }
+}

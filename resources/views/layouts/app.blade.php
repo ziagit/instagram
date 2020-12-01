@@ -57,12 +57,14 @@
                         <p id="no-data" style="text-align: center;"></p> 
                     </ul>
                 </form>
-                @endif
+
                 <a role="button" class="navbar-burger" id="navbar-burger" onclick="showMobilemenu(event);" aria-label="menu" data-target=".navbar-menu" aria-expanded="false">
                     <span aria-hidden="true"></span>
                     <span aria-hidden="true"></span>
                     <span aria-hidden="true"></span>
                 </a>
+                @endif
+                
             </div>
 
             <!-- Navbar-start -->

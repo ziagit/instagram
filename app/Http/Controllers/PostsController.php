@@ -7,9 +7,11 @@ use App\Like;
 use App\User;
 use Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\File;
 
 class PostsController extends Controller
 {
+    protected $image_path = 'images/posts/';
     /**
      * Constructor.
      */
@@ -64,7 +66,7 @@ class PostsController extends Controller
                  $posts = Post::with(['likes', 'user'])
                  ->with(array('comments'=> function($posts){
                     $posts->orderBy('pivot_created_at',"desc");
-                }))
+                }))->where("user_id","!=",auth()->id())
                  ->orderBy('id', 'desc')->take(2)
                  ->skip($count * ($page - 1))
                  ->take($count)
@@ -201,18 +203,18 @@ class PostsController extends Controller
     public function store()
     {
         Request::validate([
-            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:5048',
             'description' => 'required|max:128',
         ]);
 
         $imageName = time().'.'.request()->image->getClientOriginalExtension();
 
-        request()->image->move(public_path('images').'/posts/', $imageName);
+        request()->image->move($this->image_path.auth()->user()->name."/", $imageName);
 
         $post = new Post();
 
         $post->user_id = Auth::id();
-        $post->image = $imageName;
+        $post->image = $this->image_path.auth()->user()->name."/".$imageName;
         $post->description = request()->description;
 
         $post->save();
@@ -268,7 +270,16 @@ class PostsController extends Controller
             Request::validate([
                 'description' => 'required|max:255',
             ]);
+            if(request()->image != ""){
+                Request::validate([
+                    'image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+                ]);
+                $imageName = time().'.'.request()->image->getClientOriginalExtension();
+                
+                request()->image->move($this->image_path.auth()->user()->name."/", $imageName);
 
+                $post->image = $this->image_path.auth()->user()->name."/".$imageName;
+            }
             $post->description = request()->description;
 
             $post->save();

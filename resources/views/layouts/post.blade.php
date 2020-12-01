@@ -1,9 +1,17 @@
 <div class="card" style="padding: 0; width: 100%;">
     <div class="card-body is-transparent" style="padding: 0px;">
         <div class="user-info">
-            <figure class="image is-32x32">
+            <figure class="image is-32x32" style="margin-right: 0;">
+    
                 <img class="is-rounded" src="{{ asset('images/avatar/'.$post->user->image) }}">
+                
             </figure>
+            <span style="margin-right: 10px;color: #28b351;">
+                @if(Cache::has("is_online".$post->user->id))
+                <i class="fas fa-circle" style="font-size: 9px;"></i>
+                @endif
+            </span>
+            
             <div class="user-text ">
                 <a class="is-size-6 has-text-info " href="{{  route('account.show', ['id' => $post->user->id]) }}">{{
                     '@'.$post->user->name }}</a>
@@ -15,10 +23,10 @@
                     
                     <a>
                         <div  style="text-align: center; border-bottom: 1px solid #ddd; padding-bottom: 20px; color: red;">
-                        <form method="POST" action="{{ route('account.follow', ['id'=>$post->user->id]) }}" class="w100">
+                            <form method="POST" action="{{ route('account.follow', ['id'=>$post->user->id]) }}" class="w100">
                                     @csrf
                                     <input type="submit" class="btn btn-link mp " style="color: red;" value="{{ __('Unfollow') }}" style="margin-left: 0;">
-                                </form>
+                            </form>
                         </div>
                     </a>
                     <a>
@@ -46,7 +54,7 @@
             </div>
         </div>
         <div class="card-image">
-            <img src="{{ asset('images/posts/'.$post->image) }}" >
+            <img src="{{ asset($post->image) }}" >
         </div>
 
         <div class="card-content">

@@ -4,9 +4,7 @@
 <div class="user-container" style="margin-right: 18%;">
     <div class="user-info">
         <div class="is-flex is-v-center">
-            <figure class="image is-96x96">
                 <img class="is-rounded" src="{{ asset('images/avatar/'.$user->image) }}">
-            </figure>
             <div>
                 <h1 class="title">
                     {{ $user->display_name !== NULL ? $user->display_name : $user->name }}
