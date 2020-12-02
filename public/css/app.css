@@ -6408,6 +6408,7 @@ a.tag:hover {
 
 .card-image {
   position: relative;
+  text-align: center;
 }
 
 .card-content {
