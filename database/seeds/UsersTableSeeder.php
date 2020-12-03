@@ -11,7 +11,17 @@ class UsersTableSeeder extends Seeder
     public function run()
     {
         factory(User::class,3)->create();
-        factory(App\Post::class, 7)->create();
+        factory(App\Post::class, 7)->create([
+            'user_id'  => 1,
+        ]);
+
+        factory(App\Post::class, 7)->create([
+            'user_id'  => 2,
+        ]);
+
+        factory(App\Post::class, 7)->create([
+            'user_id'  => 3,
+        ]);
 
     }
 }
