@@ -4,10 +4,8 @@ use Faker\Generator as Faker;
 
 $factory->define(App\Post::class, function (Faker $faker) {
     return [
-        'image' => 'images/posts/demo'.rand(1, 6).'.jpg',
-        'description' => $faker->realText(128),
-        'user_id' => function () {
-            return factory(App\User::class)->create()->id;
-        },
+        'image' => 'images/posts/post_image'.rand(1, 7).'.jpg',
+        'description' => "Post ".rand(1,7),
+        'user_id' => 1,
     ];
 });

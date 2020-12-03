@@ -28,7 +28,7 @@
                                         <span class="margin-left-10" style="font-size: 15px;">{{Helper::getUser()['status']}}</span>
                                     </div>
                                     <div class="col-md-2" >
-                                    <form method="POST" action="{{ route('account.follow', ['id'=>$user->id]) }}" class="w100">
+                                    <form method="POST" action="{{ route('account.follow', $user->id) }}" class="w100">
                                         @csrf
                                         <input type="submit" class="btn btn-link mp color-dark" value="{{ __('Follow') }}" style="margin-left: 0;">
                                     </form>

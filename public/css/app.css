@@ -13184,3 +13184,7 @@ hb-hidden:hover{
     margin-left: 0;
   }
 }
+
+.image-round{
+  border-radius: 45%;
+}

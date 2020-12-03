@@ -18,11 +18,18 @@ Route::get('/', function () {
         return redirect("posts");
     }
     
-    return view('index');
+    return view('auth.login');
 });
 
 Route::post("/resend-email/{email}/{name}/{id}","UsersController@sendEmail");
 Route::post("/register-user","UsersController@registerUser")->name("registeruser");
+
+//Route socialate
+Route::get('authorized/google', 'LoginWithSocialiteController@redirectToGoogle');
+Route::get('authorized/google/callback', 'LoginWithSocialiteController@handleGoogleCallback');
+Route::get('/authorized/facebook', 'LoginWithSocialiteController@redirectTofacebook');
+Route::get('/authorized/facebook/callback', 'LoginWithSocialiteController@handleFacebookCallback');
+
 Auth::routes();
 Route::get("/verify-user-email/{email}/{id}","UsersController@registerVerifyUser");
 Route::middleware(['auth'])->group(function () {

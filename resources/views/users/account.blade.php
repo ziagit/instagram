@@ -24,7 +24,13 @@
                     <div class="profile-settings">
 
                         <!-- Image Input -->
-                        <div class="image-upload profile-image" {{ "data-image=\"".asset("images/avatar/".$user->image)."\"" }}>
+                        <div class="image-upload profile-image"
+                        @if($user->social_path != "")
+                        {{ "data-image=\"".$user->social_path."\"" }} 
+                        @else
+                        {{ "data-image=\"".asset("images/avatar/".$user->image)."\"" }}
+                        @endif
+                        >
                             <div class="file is-boxed">
                                 <label class="file-label">
                                     <input class="file-input" type="file" name="image">

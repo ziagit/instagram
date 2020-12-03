@@ -4,7 +4,11 @@
     <div class="card-body is-transparent" style="padding: 0px;">
             <div class="user-info">
                 <figure class="image is-32x32" style="margin-right: 0;">
+                    @if($post->user->social_path != "")
+                        <img class="is-rounded" src="{{ $post->user->social_path }}">
+                    @else
                     <img class="is-rounded" src="{{ asset('images/avatar/'.$post->user->image) }}">
+                    @endif
                 </figure>
                 <span style="margin-right: 10px;color: #28b351;">
                     @if(Cache::has("is_online".$post->user->id))
@@ -12,7 +16,7 @@
                     @endif
                 </span>
                 <div class="user-text ">
-                    <a class="is-size-6 has-text-info " href="{{  route('account.show', ['id' => $post->user->id]) }}">{{
+                    <a class="is-size-6 has-text-info " href="{{  route('account.show', $post->user->id) }}">{{
                         '@'.$post->user->name }}</a>
                 </div>
                 <a href="#modal-center{{$post->id}}" uk-toggle class="color-dark" style="right: -20px; font-size: 25px; margin-bottom: 5px; position: absolute; right: 6%;">...</a>
@@ -22,7 +26,7 @@
                         
                         <a>
                             <div  style="text-align: center; border-bottom: 1px solid #ddd; padding-bottom: 20px; color: red;">
-                            <form method="POST" action="{{ route('account.follow', ['id'=>$post->user->id]) }}" class="w100">
+                            <form method="POST" action="{{ route('account.follow', $post->user->id) }}" class="w100">
                                         @csrf
                                         <input type="submit" class="btn btn-link mp " style="color: red;" value="{{ __('Unfollow') }}" style="margin-left: 0;">
                                     </form>
@@ -58,49 +62,49 @@
 
         <div class="card-content">
             <div class="buttons">
-                <button id="button{{$post->id}}" onclick="likeFunction({{$post->id}})" style="outline: none;" data-path="{{ route('posts.like', ['id'=>$post->id]) }}" class="post-action like {{ $post->likes->where('user_id', Auth::id())->count() > 0 ? "liked" : ""}}">
+                <button id="button{{$post->id}}" onclick="likeFunction({{$post->id}})" style="outline: none;" data-path="{{ route('posts.like', $post->id) }}" class="post-action like {{ $post->likes->where('user_id', Auth::id())->count() > 0 ? "liked" : ""}}">
                     <span class="likes" id="likes{{$post->id}}">{{ $post->likes->count() < 999 ? $post->likes->count() : "999+" }}</span>
                     <i class="fas fa-heart mp" ></i>
                 </button>
-                <a href="{{route('posts.details',['id'=>$post->id])}}"  class="post-action " style="margin-left: 15px; background-color: #f8f9fa;">
+                <a href="{{route('posts.details',$post->id)}}"  class="post-action " style="margin-left: 15px; background-color: #f8f9fa;">
                     
                     <i class="fas fa-comment mp" ></i>
                 </a>
 
                 @if($post->user->id === Auth::id())
-                    <a href="{{ route('posts.edit', ['id'=>$post->id]) }}" class="post-action">
+                    <a href="{{ route('posts.edit', $post->id) }}" class="post-action">
                         <i class="fas fa-pen"></i>
                     </a>
                 @endif
             </div>
             <p class="lead ">
-                <a href="{{  route('account.show', ['id' => $post->user->id]) }}" class="color-dark">
+                <a href="{{  route('account.show', $post->user->id) }}" class="color-dark">
                     <b>{{$post->user->name}}</b>
                 </a>
-                <span class="fs-1rem" id="descriptonـ{{$post->id}}">{{  str_limit($post->description,40) }}</span>
+                <span class="fs-1rem" id="descriptonـ{{$post->id}}">{{  Str::limit($post->description,40) }}</span>
                 @if(strlen($post->description) > 40)
                 <a href="#" id="more_id{{$post->id}}" onclick="showMoreDescription({{$post}},event);">more</a>
                 @endif
             </p>
             @if($post->comments->count() >0)
             <div>
-                <a href="{{route('posts.details',['id'=>$post->id])}}" id="mor-comment-post/{{$post->id}}" class="color-dark ml-8" >View all 
+                <a href="{{route('posts.details',$post->id)}}" id="mor-comment-post/{{$post->id}}" class="color-dark ml-8" >View all 
                     <span class="fs-1rem" id="comment-count{{$post->id}}">{{$post->comments->count()}}</span> comments
                 </a>
             </div>
                 
                 @foreach($post->comments->take(2) as $comment)
                     <p class="lead ">
-                        <a href="{{  route('account.show', ['id' => $comment->id]) }}" class="color-dark">
+                        <a href="{{  route('account.show', $comment->id) }}" class="color-dark">
                             <b>{{$comment->name}}</b>
                         </a>
-                        <span>{{  str_limit($comment->pivot->comment,100) }}</span>
+                        <span>{{  Str::limit($comment->pivot->comment,100) }}</span>
                         
                     </p>
                 @endforeach
             @else
                 <div>
-                    <a href="{{route('posts.details',['id'=>$post->id])}}" id="mor-comment-post/{{$post->id}}" class="color-dark ml-8" data-toggle="dropdown">View all 
+                    <a href="{{route('posts.details',$post->id)}}" id="mor-comment-post/{{$post->id}}" class="color-dark ml-8" data-toggle="dropdown">View all 
                         <span id="comment-count{{$post->id}}">0</span> comments
                     </a>
                 </div>

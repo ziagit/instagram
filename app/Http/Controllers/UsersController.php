@@ -52,7 +52,7 @@ class UsersController extends Controller
         $user = User::find(Auth::id());
 
         $request->validate([
-            'image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'image' => 'mimes:jpeg,png,jpg,gif,svg|max:2048',
             'display_name' => 'nullable|string|max:32',
             'biography' => 'nullable|string|max:128',
             'email' => 'required|string|email|max:255',
@@ -67,6 +67,7 @@ class UsersController extends Controller
             $request->image->move(public_path('images').'/avatar/', $imageName);
 
             $user->image = $imageName;
+            $user->social_path = "";
         }
         else{
             $user->image = "default.png";

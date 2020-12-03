@@ -103,7 +103,11 @@
                             </a>
                             <div>
                             <figure class="image is-22x22 mp" data-toggle="dropdown">
-                                <img class="is-rounded-22" src="{{ asset('images/avatar/'.auth()->user()->image) }}" draggable="false">
+                            @if(auth()->user()->social_path != "")
+                            <img class="is-rounded-22" src="{{ auth()->user()->social_path }}" draggable="false">
+                            @else
+                            <img class="is-rounded-22" src="{{ asset('images/avatar/'.auth()->user()->image) }}" draggable="false">
+                            @endif
                             </figure>
                             <ul class="dropdown-menu profile-dropdown">
                             <li class="ml-15 mt-10 mb-8" ><a href="/user/{{auth()->user()->id}}" class="color-dark hb-hidden"><i class="fa fa-user-circle" aria-hidden="true"> </i> Profile</a></li>

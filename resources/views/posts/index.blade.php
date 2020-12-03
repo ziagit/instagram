@@ -22,7 +22,11 @@
             <div class="">
                 <div aria-labelledby="fdbdf25468ccc4 fee917d721624c">
                     <a  href="/user/{{auth()->user()->id}}" tabindex="0" style="width: 56px; height: 56px;">
+                        @if(auth()->user()->social_path != "")
+                        <img class="circle-user-image" data-testid="user-avatar" draggable="false" src="{{ auth()->user()->social_path}}">
+                        @else
                         <img class="circle-user-image" data-testid="user-avatar" draggable="false" src="{{ asset('images/avatar/'.auth()->user()->image)}}">
+                        @endif
                     </a>
                 
                 </div>
@@ -42,7 +46,11 @@
                     <div class="row" style="display: inline-block; margin-top: 10px; width: 100%;">
                         <div class="col-md-4">
                             <a  href="/user/{{$user->id}}" tabindex="0" style="width: 56px; height: 56px;">
-                                <img alt="profile picture" class="circle-user-image-32" data-testid="user-avatar" draggable="false" src="{{ asset('images/avatar/'.$user->image)}}">
+                            @if($user->social_path != "")
+                                <img alt="profile picture" class="circle-user-image-32" data-testid="user-avatar" draggable="false" src="{{ $user->social_path }}">
+                            @else
+                            <img alt="profile picture" class="circle-user-image-32" data-testid="user-avatar" draggable="false" src="{{ asset('images/avatar/'.$user->image)}}">
+                            @endif
                             </a>
                         </div>
                         <div  class="col-md-8">
@@ -58,7 +66,7 @@
                                     <span class="margin-left-10" style="font-size: 15px;">{{Helper::getUser()['status']}}</span>
                                 </div>
                                 <div class="col-md-2" >
-                                <form method="POST" action="{{ route('account.follow', ['id'=>$user->id]) }}" class="w100">
+                                <form method="POST" action="{{ route('account.follow', $user->id) }}" class="w100">
                                     @csrf
                                     <button type="submit" class="btn btn-link mp color-dark" style="margin-left: 0;">
                                         {{__('Follow')}}

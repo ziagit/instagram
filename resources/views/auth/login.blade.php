@@ -74,6 +74,15 @@
                             {{ __('Reset') }}
                         </a></p>
                 </form>
+                <div class="flex items-center justify-end mt-4">
+                <a href="{{ url('authorized/google') }}">
+                    <img src="https://developers.google.com/identity/images/btn_google_signin_dark_normal_web.png" >
+                </a>
+                <a href="{{url('/authorized/facebook')}}" class="btn btn-primary">
+                <i class="fab fa-facebook"></i>
+                Sign with Facebook</a>
+
+                </div>
             </div>
         </div>
     </div>

@@ -203,7 +203,7 @@ class PostsController extends Controller
     public function store()
     {
         Request::validate([
-            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:5048',
+            'image' => 'required|mimes:jpeg,png,jpg,gif,svg|max:5048',
             'description' => 'required|max:128',
         ]);
 
