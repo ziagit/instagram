@@ -45,6 +45,10 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/posts/{post}', 'PostsController@like')->name('posts.like');
     Route::patch('/posts/{post}', 'PostsController@update')->name('posts.update');
     Route::delete('/posts/{post}', 'PostsController@destroy')->name('posts.destroy');
+    Route::get("/multipleimages",function(){
+        return view("posts.multipleimage");
+    });
+    Route::post("/multipleimages","PostsController@storeMultipleimage")->name("multipleimages.store");
 
     //Users
     Route::get('/account/settings', 'UsersController@settings')->name('account');

@@ -351,4 +351,27 @@ class PostsController extends Controller
             'posts' => $posts,
         ]);
     }
+
+    /**
+     * Store multiple image
+     * @param $images
+     */
+    public function storeMultipleimage(){
+       
+        foreach(request()->images as $key => $image){
+            $imageName = time().'.'.$image->getClientOriginalName();
+
+            $image->move($this->image_path.auth()->user()->name."/", $imageName);
+    
+            $post = new Post();
+    
+            $post->user_id = Auth::id();
+            $post->image = $this->image_path.auth()->user()->name."/".$imageName;
+            $post->description = "Post ".$key;
+    
+            $post->save();
+        }
+        toast('Your Post has been posted!','success');
+        return redirect('user/'.auth()->id());
+    }
 }

@@ -11,11 +11,18 @@ use Illuminate\Support\Facades\File;
 
 class LoginWithSocialiteController extends Controller
 {
+
+    /**
+     * redirect to the google drover
+     */
      public function redirectToGoogle()
     {
         return Socialite::driver('google')->redirect();
     }
 
+    /**
+     * get the user from google and check if exist login if do not exist create new
+     */
     public function handleGoogleCallback()
     {
         try {
@@ -47,11 +54,17 @@ class LoginWithSocialiteController extends Controller
         }
     }
 
+    /**
+     * redirect user from facebook driver
+     */
     public function redirectToFacebook()
     {
         return Socialite::driver('facebook')->redirect();
     }
 
+    /**
+     * create new account if don't exists
+     */
     public function handleFacebookCallback()
     {
         try {
