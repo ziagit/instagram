@@ -7,6 +7,7 @@ use Laravel\Socialite\Facades\Socialite;
 use App\User;
 use Illuminate\Support\Facades\Auth;
 use Exception;
+use Illuminate\Support\Facades\File;
 
 class LoginWithSocialiteController extends Controller
 {
@@ -21,7 +22,6 @@ class LoginWithSocialiteController extends Controller
       
             $user = Socialite::driver('google')->user();
             $finduser = User::where('google_id', $user->id)->first();
-       
             if($finduser){
        
                 Auth::login($finduser);
@@ -58,6 +58,7 @@ class LoginWithSocialiteController extends Controller
       
             $user = Socialite::driver('facebook')->user();
             $finduser = User::where('facebook_id', $user->id)->first();
+
             if($finduser){
        
                 Auth::login($finduser);
@@ -65,9 +66,19 @@ class LoginWithSocialiteController extends Controller
                 return redirect()->intended('/posts');
        
             }else{
+                if(!empty($user->getAvatar()))
+                {
+
+                    $fileContents = file_get_contents($user->getAvatar());
+                    File::put(public_path('images/avatar') .'/'. $user->getId() . ".jpg", $fileContents);
+
+
+                }
+                $imageUrl = $user->getId() . ".jpg";
                 $newUser = User::create([
                     'name' => $user->name,
                     'facebook_id'=> $user->id,
+                    'image' => $imageUrl,
                     'password' => bcrypt('password@123'),
                 ]);
       
