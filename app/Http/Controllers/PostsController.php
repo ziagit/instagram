@@ -367,7 +367,7 @@ class PostsController extends Controller
     
             $post->user_id = Auth::id();
             $post->image = $this->image_path.auth()->user()->name."/".$imageName;
-            $post->description = "Post ".$key;
+            $post->description = "This is the post ".$key;
     
             $post->save();
         }
