@@ -12,7 +12,11 @@
                         <div class="row" style="display: inline-block; margin-top: 10px; width: 100%;">
                             <div class="col-md-4">
                                 <a  href="/user/{{$user->id}}" tabindex="0" style="width: 56px; height: 56px;">
+                                @if($user->social_path != "")
+                                <img alt="profile picture" class="circle-user-image-32" data-testid="user-avatar" draggable="false" src="{{ $user->social_path}}">
+                                @else
                                     <img alt="profile picture" class="circle-user-image-32" data-testid="user-avatar" draggable="false" src="{{ asset('images/avatar/'.$user->image)}}">
+                                @endif
                                 </a>
                             </div>
                             <div  class="col-md-8">
