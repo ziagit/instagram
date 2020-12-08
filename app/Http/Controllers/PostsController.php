@@ -29,7 +29,7 @@ class PostsController extends Controller
     public function index()
     {
          //Ammount to fetch
-         $count = 2;
+         $count = 5;
 
          Request::validate([
              'page' => 'nullable|numeric',
@@ -67,7 +67,7 @@ class PostsController extends Controller
                  ->with(array('comments'=> function($posts){
                     $posts->orderBy('pivot_created_at',"desc");
                 }))->where("user_id","!=",auth()->id())
-                 ->orderBy('id', 'desc')->take(2)
+                 ->orderBy('id', 'desc')
                  ->skip($count * ($page - 1))
                  ->take($count)
                  ->get();
