@@ -28,8 +28,12 @@ class LoginWithSocialiteController extends Controller
         try {
       
             $user = Socialite::driver('google')->user();
-            $finduser = User::where('google_id', $user->id)->first();
+            $finduser = User::where('google_id', $user->id)->orWhere("email",$user->email)->first();
             if($finduser){
+                if($finduser->image == "default.png"){
+                    $finduser->social_path = $user->avatar_original;
+                    $finduser->save();
+                }
        
                 Auth::login($finduser);
       
